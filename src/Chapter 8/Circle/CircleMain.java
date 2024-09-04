@@ -16,7 +16,7 @@ public class CircleMain {
         } else {
             System.out.println("Objects are not equal");
         }
-
+        //cheese
         System.out.println(spot);
         System.out.println(spotP2);
   
