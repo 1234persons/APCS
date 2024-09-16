@@ -8,6 +8,7 @@ public class MySavings {
         PiggyBank bank = new PiggyBank();
 
         int userInput;
+        double withdrawal;
 
         do {
 
@@ -19,8 +20,9 @@ public class MySavings {
         System.out.println("6. Take money out of the bank.");
         System.out.println("Enter 0 to quit.");
         System.out.println("Enter your choice: ");
+        do {
         userInput = input.nextInt();
-
+        } while (userInput > 6 || userInput < 1);
             if(userInput == 0) break;
 
         switch(userInput) {
@@ -40,7 +42,13 @@ public class MySavings {
                 bank.addQuarters(input.nextInt()); break;
             case 6:
                 System.out.println("Enter the amount you'd like to withdrawal: ");
-                bank.withdrawal(input.nextDouble()); break;
+                withdrawal = input.nextDouble();
+                if (withdrawal > bank.getMoney()) {
+                    System.out.println("You don't have that much money.");
+                } else {
+                    bank.withdrawal(withdrawal);
+                }
+                break;
 
         }
 
