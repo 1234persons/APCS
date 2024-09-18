@@ -10,7 +10,7 @@ public class Circle {
         color = "Black";
     }
 
-    public Circle(double newRad) { // Overloaded Constructor, Now accepts radius, Circle P2
+    public Circle(double newRad) {
         radius = newRad;
     }
 
