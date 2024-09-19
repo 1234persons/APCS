@@ -1,8 +1,6 @@
 public class Puck extends Disk {
     private double weight;
     private boolean standard;
-    private boolean youth;
-
 
     public Puck(double weight) {
         super(3, 1);
@@ -10,8 +8,6 @@ public class Puck extends Disk {
 
         if (weight >= 5) {
             standard = true;
-        } else {
-            youth = true;
         }
     }
 
