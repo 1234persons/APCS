@@ -1,13 +1,13 @@
-abstract class Woodwind extends Instrument {
+abstract class Percussion extends Instrument {
     
 
     /*
      * constructor
      * pre: none
-     * post: woodwind player created
+     * post: percussionist created
      */
 
-     public Woodwind(String player) {
+     public Percussion(String player) {
         super(player);
      }
 
