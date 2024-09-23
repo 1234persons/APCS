@@ -1,5 +1,5 @@
 abstract class Percussion extends Instrument {
-    
+
 
     /*
      * constructor
@@ -15,7 +15,7 @@ abstract class Percussion extends Instrument {
       * Returns the sound of the instrument
       */
       public String makeSound() {
-        return("toot");
+        return("bang");
       }
 
 }

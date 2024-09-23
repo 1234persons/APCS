@@ -26,6 +26,7 @@ public class Music {
         } else { // default to clarinet
             return (new Clarinet(name));
         }
+        
     }
 
     public static void main(String[] args) {
@@ -59,6 +60,6 @@ public class Music {
             System.out.print("\nWould you like to hear a Solo, a Duet, a Trio, a quartet, or Leave? ");
             performanceChoice = input.nextLine();
         }
-    input.close();
+        input.close();
     }
 }
