@@ -6,6 +6,7 @@ public class Performance {
     private Instrument solo;
     private Instrument duet_1, duet_2;
     private Instrument trio_1, trio_2, trio_3;
+    private Instrument quartet_1, quartet_2, quartet_3, quartet_4;
 
     /**
      * constructor
@@ -38,6 +39,19 @@ public class Performance {
         trio_2 = t2;
         trio_3 = t3;
         arrangement = trio_1.makeSound() + trio_2.makeSound() + trio_3.makeSound();
+    }
+
+    /**
+     * constructor
+     * pre: none
+     * post: The members of a quartet have been selected.
+     */
+    public Performance(Instrument t1, Instrument t2, Instrument t3, Instrument t4) {
+        quartet_1 = t1;
+        quartet_2 = t2;
+        quartet_3 = t3;
+        quartet_4 = t4;
+        arrangement = quartet_1.makeSound() + quartet_2.makeSound() + quartet_3.makeSound() + quartet_4.makeSound();
     }
 
     /**

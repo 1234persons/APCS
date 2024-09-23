@@ -17,10 +17,8 @@ public class Music {
         System.out.println("Select an instrument for the band member. ");
         System.out.print("Vocals, Piccolo, or Clarinet: ");
         instrumentChoice = input.nextLine();
-
         System.out.print("Enter the band member's name: ");
         name = input.nextLine();
-
         if (instrumentChoice.equalsIgnoreCase("V")) {
             return (new Vocal(name));
         } else if (instrumentChoice.equalsIgnoreCase("P")) {
@@ -32,7 +30,7 @@ public class Music {
 
     public static void main(String[] args) {
         Performance band;
-        Instrument bandMember1, bandMember2, bandMember3;
+        Instrument bandMember1, bandMember2, bandMember3, bandMember4;
         Scanner input = new Scanner(System.in);
         String performanceChoice;
 
@@ -40,23 +38,27 @@ public class Music {
         bandMember1 = assignInstrument();
         bandMember2 = assignInstrument();
         bandMember3 = assignInstrument();
+        bandMember4 = assignInstrument();
 
         System.out.println(bandMember1 + " " + bandMember2 + " " + bandMember3 + " " + "\n");
 
-        System.out.print("Would you like to hear a Solo, a Duet, a Trio, or Leave? ");
+        System.out.print("Would you like to hear a Solo, a Duet, a Trio, a quartet, or Leave? ");
         performanceChoice = input.nextLine();
         while (!performanceChoice.equalsIgnoreCase("L")) {
             if (performanceChoice.equalsIgnoreCase("S")) {
                 band = new Performance(bandMember1);
             } else if (performanceChoice.equalsIgnoreCase("D")) {
                 band = new Performance(bandMember1, bandMember2);
-            } else {
+            } else if (performanceChoice.equalsIgnoreCase("T")) {
                 band = new Performance(bandMember1, bandMember2, bandMember3);
+            } else {
+                band = new Performance(bandMember1, bandMember2, bandMember3, bandMember4);
             }
             band.begin();
 
-            System.out.print("\nWould you like to hear a Solo, a Duet, a Trio, or Leave? ");
+            System.out.print("\nWould you like to hear a Solo, a Duet, a Trio, a quartet, or Leave? ");
             performanceChoice = input.nextLine();
         }
+        input.close();
     }
 }
