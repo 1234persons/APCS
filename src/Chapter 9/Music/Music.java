@@ -15,7 +15,7 @@ public class Music {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Select an instrument for the band member. ");
-        System.out.print("Vocals, Piccolo, or Clarinet: ");
+        System.out.print("Vocals, Piccolo, Clarinet, Drums, or Cymbals(Cy): ");
         instrumentChoice = input.nextLine();
         System.out.print("Enter the band member's name: ");
         name = input.nextLine();
@@ -23,8 +23,12 @@ public class Music {
             return (new Vocal(name));
         } else if (instrumentChoice.equalsIgnoreCase("P")) {
             return (new Piccolo(name));
-        } else { // default to clarinet
+        } else if (instrumentChoice.equalsIgnoreCase("C")) {
             return (new Clarinet(name));
+        } else if (instrumentChoice.equalsIgnoreCase("CY")) {
+            return(new Cymbals(name));
+        } else {
+            return(new Drums(name));
         }
         
     }
