@@ -1,3 +1,5 @@
+package Circle;
+
 public class TestDisk {
     public static void main(String[] args) {
         Disk saucer = new Disk(10, 0.02);
@@ -8,12 +10,17 @@ public class TestDisk {
 
         Disk plate1 = new Disk(12, 0.05);
         Disk plate2 = new Disk(12, 0.07);
+        Disk plate3 = new Disk(12,0.05);
 
         if(plate1.equals(plate2)) {
             System.out.println("Objects are equal.");
         } else {
             System.out.println("Objects are not equal.");
         }
+
+        System.out.println(plate1.compareTo(plate2));
+        System.out.println(plate2.compareTo(plate1));
+        System.out.println(plate3.compareTo(plate1));
 
         System.out.println(plate1);
         System.out.println(plate2);

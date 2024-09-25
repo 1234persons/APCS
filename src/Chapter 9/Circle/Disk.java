@@ -1,6 +1,6 @@
-import Circle.Circle;
+package Circle;
 
-public class Disk extends Circle {
+public class Disk extends Circle implements Comparable {
     private double thickness;
 
     /*
@@ -77,5 +77,17 @@ public class Disk extends Circle {
         diskString = "The disk has a radius " + super.getRadius() + " and a thickness of " + thickness + ".";
 
         return (diskString);
+    }
+
+    public int compareTo(Object d) {
+        Disk testDisk = (Disk)d;
+
+        if(super.getRadius() < testDisk.getRadius() || thickness < testDisk.getThickness()) {
+            return(-1);
+        } else if (super.getRadius() == testDisk.getRadius() && thickness == testDisk.getThickness()) {
+            return(0);
+        } else {
+            return(1);
+        }
     }
 }

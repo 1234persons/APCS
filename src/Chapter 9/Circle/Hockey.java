@@ -1,3 +1,5 @@
+package Circle;
+
 public class Hockey {
     public static void main(String[] args) {
         Puck hockeyPuck = new Puck(5);

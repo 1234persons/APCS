@@ -45,7 +45,7 @@ public class Music {
         bandMember3 = assignInstrument();
         bandMember4 = assignInstrument();
 
-        System.out.println(bandMember1 + " " + bandMember2 + " " + bandMember3 + " " + "\n");
+        System.out.println(bandMember1 + " " + bandMember2 + " " + bandMember3 + " " + bandMember4 + "\n");
 
         System.out.print("Would you like to hear a Solo, a Duet, a Trio, a quartet, or Leave? ");
         performanceChoice = input.nextLine();
