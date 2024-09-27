@@ -1,6 +1,6 @@
 package Rectangle2;
 
-public class Rectangle implements Comparable, ComparableArea {
+public class Rectangle implements Comparable {
 
     private double width;
     private double length;
@@ -41,10 +41,6 @@ public class Rectangle implements Comparable, ComparableArea {
         rectangleString = "This rectangle has a length of " + length + " and a width of " + width;
 
         return (rectangleString);
-    }
-
-    public interface ComparableArea {
-        int compareArea(Object r);
     }
 
     public boolean equals(Object R) {
