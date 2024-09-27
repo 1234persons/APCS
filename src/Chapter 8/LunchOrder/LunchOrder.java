@@ -34,6 +34,6 @@ public class LunchOrder {
         System.out.println("Each soda has " + soda.getFat() + " grams of fat, " + soda.getCarbs() + " grams of carbs, and " + soda.getFiber() + " gram of fiber.");
 
         System.out.println("The total price is " + money.format(price) + ".");
-        
+        input.close();
     }
 }

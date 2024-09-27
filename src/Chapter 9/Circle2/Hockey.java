@@ -1,4 +1,4 @@
-package Circle;
+package Circle2;
 
 public class Hockey {
     public static void main(String[] args) {

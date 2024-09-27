@@ -1,4 +1,4 @@
-package Circle;
+package Circle2;
 
 public class Puck extends Disk {
     private double weight;

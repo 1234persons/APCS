@@ -1,4 +1,4 @@
-package Circle;
+package Circle2;
 
 public class Disk extends Circle implements Comparable {
     private double thickness;
