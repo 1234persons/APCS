@@ -1,6 +1,6 @@
 package Rectangle2;
 
-public class Rectangle implements Comparable {
+public class Rectangle implements Comparable, ComparableArea {
 
     private double width;
     private double length;
@@ -78,4 +78,6 @@ public class Rectangle implements Comparable {
             return(1);
         }
     }
+
+
 }
