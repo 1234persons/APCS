@@ -18,9 +18,13 @@ public class TestDisk {
             System.out.println("Objects are not equal.");
         }
 
-        System.out.println(plate1.compareTo(plate2));
-        System.out.println(plate2.compareTo(plate1));
-        System.out.println(plate3.compareTo(plate1));
+        if (plate1.compareTo(plate2) == -1) {
+            System.out.println("Disk one is smaller than disk 2.");
+        } else if (plate1.compareTo(plate2) == 0) {
+            System.out.println("Disk one is equal to disk 2.");
+        } else {
+            System.out.println("Disk one is larger than disk 2.");
+        }
 
         System.out.println(plate1);
         System.out.println(plate2);
