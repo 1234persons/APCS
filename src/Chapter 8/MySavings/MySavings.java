@@ -1,8 +1,7 @@
 import java.util.Scanner;
 import java.text.NumberFormat;
-package MySavings;
 
-public class MySavingsClient {
+public class MySavings {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         NumberFormat money = NumberFormat.getCurrencyInstance();

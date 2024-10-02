@@ -19,6 +19,7 @@ public class UniversityClient {
         System.out.println(employee2);
         System.out.println(employee3);
         System.out.println(employee4);
+
     }
 
     public static UEmployee assignJob() {
