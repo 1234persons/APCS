@@ -22,6 +22,7 @@ public class StudentRoster {
             System.out.println(student);
         }
 
+        input.close();
     }
 
 }

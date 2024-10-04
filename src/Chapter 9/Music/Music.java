@@ -4,7 +4,7 @@ import java.util.Scanner;
  * A musical performance.
  */
 public class Music {
-
+    public static Scanner input = new Scanner(System.in);
     /*
      * Returns a selected instrument.
      * pre: none
@@ -12,7 +12,6 @@ public class Music {
      */
     public static Instrument assignInstrument() {
         String instrumentChoice, name;
-        Scanner input = new Scanner(System.in);
 
         System.out.println("Select an instrument for the band member. ");
         System.out.print("Vocals, Piccolo, Clarinet, Drums, or Cymbals(Cy): ");

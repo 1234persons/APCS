@@ -3,6 +3,7 @@ package Vehicles;
 import java.util.Scanner;
 
 public class VehicleClient {
+    public static Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
         Vehicle vehicle1 = assignVehicle();
         Vehicle vehicle2 = assignVehicle();
@@ -12,10 +13,11 @@ public class VehicleClient {
         System.out.println(vehicle2);
         System.out.println(vehicle3);
 
+        input.close();
+
     }
 
     public static Vehicle assignVehicle() {
-        Scanner input = new Scanner(System.in);
 
         String brand;
         String model;

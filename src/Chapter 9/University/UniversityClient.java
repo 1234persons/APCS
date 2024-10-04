@@ -2,7 +2,7 @@ package University;
 import java.util.Scanner;
 
 public class UniversityClient {
-
+    public static Scanner input = new Scanner(System.in);
     public static void main(String[] args) {
         
         UEmployee employee1;
@@ -19,11 +19,11 @@ public class UniversityClient {
         System.out.println(employee2);
         System.out.println(employee3);
         System.out.println(employee4);
-
+        input.close();
     }
 
     public static UEmployee assignJob() {
-        Scanner input = new Scanner(System.in);
+        
         String employeeType, name;
         double salary;
 
@@ -41,8 +41,6 @@ public class UniversityClient {
         } else {
             return(new Staff(name, salary));
         }
-        
-
 
     }
 

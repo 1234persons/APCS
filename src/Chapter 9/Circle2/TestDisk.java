@@ -26,6 +26,11 @@ public class TestDisk {
             System.out.println("Disk one is larger than disk 2.");
         }
 
+        if (plate1.equals(plate3)) {
+            System.out.println("The disks are equal.");
+        }
+
+
         System.out.println(plate1);
         System.out.println(plate2);
 
