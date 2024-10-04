@@ -1,7 +1,7 @@
 public class Reverse {
     public static void main(String[] args) {
         
-        int[] numList = new int[10];
+        int[] numList = new int[11];
 
         for (int i = 0; i < numList.length; i++) {
             numList[i] = i;
