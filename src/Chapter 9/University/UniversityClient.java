@@ -24,11 +24,11 @@ public class UniversityClient {
 
     public static UEmployee assignJob() {
         
-        String employeeType, name;
+        String employeeType, name, employeeTrait;
         double salary;
 
         System.out.println("Enter if the employee is faculty(F) or staff(s)");
-        employeeType = input.nextLine();
+        employeeType = input.next();
 
         System.out.println("Enter the employees salery: ");
         salary = input.nextDouble();
@@ -37,9 +37,15 @@ public class UniversityClient {
         name = input.next();
 
         if(employeeType.equalsIgnoreCase("F")) {
-            return(new Faculty(name, salary));
+            System.out.println("Enter the faculty's department: ");
+            employeeTrait = input.next();
+
+            return(new Faculty(name, salary, employeeTrait));
         } else {
-            return(new Staff(name, salary));
+            System.out.println("Enter the staff's title: ");
+            employeeTrait = input.next();
+
+            return(new Staff(name, salary, employeeTrait));
         }
 
     }

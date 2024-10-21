@@ -6,14 +6,13 @@ public class NumberCounts {
         Scanner input = new Scanner(System.in);
         int userNum;
 
-        int[] digits = new int[11];
+        int[] digits = new int[10];
 
         System.out.println("Enter a number: ");
         userNum = input.nextInt();
 
         while(userNum >= 1) {
-            userNum %= 10;
-            digits[userNum] += 1;
+            digits[userNum % 10] += 1;
             userNum /= 10;
         }
 
@@ -21,6 +20,7 @@ public class NumberCounts {
             System.out.println(i + ": " + digits[i]);
         }
 
+        input.close();
 
     }
 }

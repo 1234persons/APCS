@@ -4,8 +4,9 @@ public class Staff extends UEmployee{
     
     private String title;
 
-    public Staff(String name, double salary) {
+    public Staff(String name, double salary, String title) {
         super(name, salary);
+        this.title = title;
     }
 
     public void setTitle(String title) {

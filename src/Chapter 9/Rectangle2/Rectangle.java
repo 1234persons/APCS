@@ -70,9 +70,9 @@ public class Rectangle implements Comparable, ComparableArea {
     public int compareArea(Object r) {
         Rectangle testRect = (Rectangle)r;
 
-        if(area() < testRect.area() && area() < testRect.area()) {
+        if(area() < testRect.area()) {
             return(-1);
-        } else if (area() == testRect.area() && area() == testRect.area()) {
+        } else if (area() == testRect.area()) {
             return(0);
         } else {
             return(1);

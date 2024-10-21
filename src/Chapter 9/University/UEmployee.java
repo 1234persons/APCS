@@ -1,6 +1,6 @@
 package University;
 
-abstract class UEmployee {
+public class UEmployee {
     private String name;
     private double salary;
 
