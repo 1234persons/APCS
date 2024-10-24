@@ -69,6 +69,7 @@ public class GameOfLight {
                 moves += 1;
             }
         }
+        input.close();
     }
 
     public static void setCell(String[][] grid, int row, int column) {

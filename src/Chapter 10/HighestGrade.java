@@ -16,5 +16,6 @@ public class HighestGrade {
         }
 
         System.out.println(bestGrade + " is the best grade.");
+        input.close();
     }
 }
