@@ -4,16 +4,16 @@ public class NameBackwards {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String name;
-        String backwardsName = "";
 
         System.out.println("Enter your name: ");
-        name = input.next();
+        name = input.nextLine();
 
-        for (int i = name.length() - 1; i >= 0; i--) {
-            backwardsName += name.charAt(i);
+        char[] backwardsName = name.toCharArray();
+
+        for (int i = backwardsName.length - 1; i >= 0; i--) {
+            System.out.print(backwardsName[i]);
         }
 
-        System.out.println(backwardsName);
         input.close();
     }
 }

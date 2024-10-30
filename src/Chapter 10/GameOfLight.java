@@ -8,7 +8,7 @@ public class GameOfLight {
         int userLength;
         int row;
         int column;
-        int moves = 0;
+        int moves = 1;
 
         do {
             System.out.println("Enter how wide you would like the grid: (3-9)");
