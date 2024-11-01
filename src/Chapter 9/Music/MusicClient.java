@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * A musical performance.
  */
-public class Music {
+public class MusicClient {
     public static Scanner input = new Scanner(System.in);
     /*
      * Returns a selected instrument.
