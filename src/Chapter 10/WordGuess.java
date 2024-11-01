@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -30,6 +29,7 @@ public class WordGuess {
             letterGuess = input.nextLine();
             letterGuess = letterGuess.toUpperCase();
             } while (!alreadyGuessed(letterGuess, letterGuesses));
+            letterGuesses[numGuesses] = letterGuess;
             /* increment number of guesses */
             numGuesses += 1;
 
@@ -68,6 +68,7 @@ public class WordGuess {
         System.out.println("The secret word is " + SECRET_WORD);
         System.out.println("You made " + numGuesses + " guesses.");
         System.out.println("Your score is " + score);
+        input.close();
     }
 
     private static boolean alreadyGuessed(String letterGuessed, String[] guesses) {
@@ -75,10 +76,10 @@ public class WordGuess {
         for (int i = 0; i < guesses.length; i++) {
             if (letterGuessed.equals(guesses[i])) {
                 System.out.println("You already guessed " + letterGuessed + " try again.");
-                return (true);  
+                return (false);  
             } 
         }
         letterGuessed += letterGuessed;
-        return(false);
+        return(true);
     }
 }

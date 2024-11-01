@@ -26,6 +26,6 @@ public class FindNum {
             System.out.println("The first occurrence of the number is: " + location);
         }
 
-
+        input.close();
     }
 }

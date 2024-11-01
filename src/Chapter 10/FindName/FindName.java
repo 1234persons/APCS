@@ -25,5 +25,6 @@ public class FindName {
         } else {
             System.out.println("The string's location in the array is: " + location);
         }
+        input.close();
     }
 }

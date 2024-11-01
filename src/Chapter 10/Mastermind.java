@@ -43,6 +43,8 @@ public class Mastermind {
             guessCount += 1;
         } while (!gameOver(guesses, solution));
 
+        input.close();
+
     }
 
     public static boolean gameOver(int[] playerGuess, int[] solution) {

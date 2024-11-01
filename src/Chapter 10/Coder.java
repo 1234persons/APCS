@@ -22,6 +22,6 @@ public class Coder {
         for (int i = 0; i < userChars.length; i++) {
             System.out.print(userChars[i]);
         }
-
+        input.close();
     }
 }
