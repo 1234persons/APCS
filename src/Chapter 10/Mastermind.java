@@ -60,27 +60,17 @@ public class Mastermind {
         int correctColorNum = 0;
         int[] tempSolution = solution;
 
-        for (int i = 0; i < solution.length; i++) {
-            for (int j = 0; j < solution.length; j++) {
-                if (solution[i] == solution[j] && i != j) {
-                    tempSolution[i] = 0;
-                }
-            }
-        }
-
         for (int i = 0; i < guesses.length; i++) {
             if (guesses[i] == solution[i]) {
-                correctColorNum += 1;
                 correctPegNum += 1;
+                tempSolution[i] = 10;
             }
         }
 
         for (int i = 0; i < guesses.length; i++) {
-            for (int j = 0; j < guesses.length; j++) {
+            for (int j = 0; j < tempSolution.length; j++) {
                 if (guesses[i] == tempSolution[j] && i != j) {
                     correctColorNum += 1;
-                } else if (tempSolution[j] == 0) {
-                    correctColorNum -= 1;
                 }
             }
         }
