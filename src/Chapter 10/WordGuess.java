@@ -26,7 +26,7 @@ public class WordGuess {
         do {
             do {
             System.out.print("Enter a letter (" + FLAG + " to guess entire word): ");
-            letterGuess = input.nextLine();
+            letterGuess = input.nextLine().substring(0,1);
             letterGuess = letterGuess.toUpperCase();
             } while (!alreadyGuessed(letterGuess, letterGuesses));
             letterGuesses[numGuesses] = letterGuess;

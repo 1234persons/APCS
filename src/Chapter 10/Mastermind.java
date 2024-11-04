@@ -34,15 +34,17 @@ public class Mastermind {
             System.out.println("Guess " + guessCount + ": ");
 
             for (int i = 0; i < guesses.length; i++) {
+                do {
                 System.out.print("Peg " + (i + 1) + ": ");
                 guesses[i] = input.nextInt();
+                } while (guesses[i] < 0 || guesses[i] > 10);
             }
 
             pegCheck(guesses, solution);
 
             guessCount += 1;
         } while (!gameOver(guesses, solution));
-
+        System.out.println("You won in " + guessCount + " guesses!");
         input.close();
 
     }
@@ -50,34 +52,37 @@ public class Mastermind {
     public static boolean gameOver(int[] playerGuess, int[] solution) {
         for (int i = 0; i < playerGuess.length; i++) {
             if (playerGuess[i] != solution[i]) {
-                return(false);
+                return (false);
             }
         }
-        return(true);
+        return (true);
     }
 
     public static void pegCheck(int[] guesses, int[] solution) {
-        
-        int correctPegNum = 0;
-        int correctColorNum = 0;
-        int[] tempSolution = solution;
+
+        int correctPegNumAndColor = 0;
+        int correctColorNumNotPosition = 0;
+        int[] tempSolution = solution.clone();
+        int[] tempGuess = guesses.clone();
 
         for (int i = 0; i < guesses.length; i++) {
-            if (guesses[i] == solution[i]) {
-                correctPegNum += 1;
+            if (tempGuess[i] == tempSolution[i]) {
+                correctPegNumAndColor += 1;
                 tempSolution[i] = 10;
+                tempGuess[i] = 11;
             }
         }
 
         for (int i = 0; i < guesses.length; i++) {
             for (int j = 0; j < tempSolution.length; j++) {
-                if (guesses[i] == tempSolution[j] && i != j) {
-                    correctColorNum += 1;
+                if (tempGuess[i] == tempSolution[j]) {
+                    correctColorNumNotPosition += 1;
+                    // tempSolution[i] = 10;
+                    // tempGuess[i] = 11;
                 }
             }
         }
 
-
-        System.out.println("There are " + correctPegNum + " correct pegs and " + correctColorNum + " correct colors.");
+        System.out.println("There are " + correctPegNumAndColor + " correct pegs and colors but " + correctColorNumNotPosition + " correct colors and not pegs.");
     }
 }
