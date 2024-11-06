@@ -16,7 +16,7 @@ public class Life {
 
             }
         }
-        //printBoard(grid, 10, 10);
+        // printBoard(grid, 10, 10);
 
         while (true) {
 
@@ -32,14 +32,62 @@ public class Life {
 
     public static void setCells(String[][] grid) {
         int neighborNum = 0;
-        
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+
+                // Check cell
                 if (grid[i][j].equals("X")) {
-                    if (grid[i - 1][j].equals("X")) {
-                        neighborNum++;
-                    }
+                    neighborNum++;
                 }
+
+                // Check cell below and to the left
+                if (grid[i - 1][j - 1].equals("X") && i - 1 > 0 && i  < 10 && j - 1 > 0 && j < 10) {
+                    neighborNum++;
+                }
+
+                // Check cell below
+                if (grid[i - 1][j].equals("X") && i - 1 > 0 && i  < 10 && j - 1 > 0 && j < 10) {
+                    neighborNum++;
+                }
+
+                // Check cell below and to the right
+                if (grid[i - 1][j + 1].equals("X") && i - 1 > 0 && i < 10 && j - 1 > 0 && j + 1 < 10) {
+                    neighborNum++;
+                }
+
+                // Check cell to the right
+                if (grid[i][j + 1].equals("X") && i > 0 && i < 10 && j > 0 && j + 1 < 10) {
+                    neighborNum++;
+                }
+
+                // Check cell to the left
+                if (grid[i][j - 1].equals("X") && i > 0 && i < 10 && j - 1 > 0 && j < 10) {
+                    neighborNum++;
+                }
+
+                // Check cell above and to the left
+                if (grid[i + 1][j - 1].equals("X") && i > 0 && i + 1 < 10 && j - 1 > 0 && j < 10) {
+                    neighborNum++;
+                }
+
+                // Check cell above
+                if (grid[i + 1][j].equals("X") && i > 0 && i + 1 < 10 && j > 0 && j < 10) {
+                    neighborNum++;
+                }
+
+                // Check cell above and to the right
+                if (grid[i + 1][j + 1].equals("X") && i > 0 && i + 1 < 10 && j > 0 && j + 1 < 10) {
+                    neighborNum++;
+                }
+
+                if (neighborNum == 2 || neighborNum == 3) {
+                    grid[i][j] = "X";
+                } else {
+                    grid[i][j] = "O";
+                }
+
             }
             System.out.println();
 
