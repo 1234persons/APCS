@@ -1,5 +1,6 @@
 package Circle2;
 
+@SuppressWarnings("rawtypes")
 public class Disk extends Circle implements Comparable {
     private double thickness;
 

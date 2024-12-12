@@ -3,9 +3,8 @@
 import javax.swing.*;
 
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.event.*;
-import java.lang.Math.*;
+
 
 public class Roll implements ActionListener{
     JFrame frame;
@@ -69,7 +68,8 @@ public class Roll implements ActionListener{
 	 */
 	private static void runGUI() {
 		JFrame.setDefaultLookAndFeelDecorated(true);
-		Roll die = new Roll();
+		@SuppressWarnings("unused")
+        Roll die = new Roll();
 	}
 
 	public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package Rectangle2;
 
+@SuppressWarnings("rawtypes")
 public class Rectangle implements Comparable, ComparableArea {
 
     private double width;

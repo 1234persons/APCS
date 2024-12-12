@@ -60,6 +60,7 @@ public class Riddle implements ActionListener {
 	 */
 	private static void runGUI() {
 		JFrame.setDefaultLookAndFeelDecorated(true);
+		@SuppressWarnings("unused")
 		Riddle Riddle = new Riddle();
 	}
 

@@ -61,6 +61,7 @@ public class Sunflower implements ActionListener {
 	*/
 	private static void runGUI() {
 		JFrame.setDefaultLookAndFeelDecorated(true);
+		@SuppressWarnings("unused")
 		Sunflower flower = new Sunflower();
 	}
 

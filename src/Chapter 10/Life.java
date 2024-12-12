@@ -47,6 +47,7 @@ public class Life {
                 break;
             }
         }
+        input.close();
     }
 
     public static void setCells(String[][] grid) {
@@ -97,6 +98,8 @@ public class Life {
             }
 
         }
+
+        
     }
 
     public static void printBoard(String[][] grid, int width, int length) {

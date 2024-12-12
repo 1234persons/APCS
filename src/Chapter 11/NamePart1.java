@@ -35,6 +35,7 @@ public class NamePart1 {
 	*/
 	private static void runGUI() {
 		JFrame.setDefaultLookAndFeelDecorated(true);
+		@SuppressWarnings("unused")
 		NamePart1 name = new NamePart1();
 	}
 

@@ -10,6 +10,7 @@ public class MetricConversion implements ActionListener {
     JPanel contentPane;
     JLabel label;
     JLabel display;
+    @SuppressWarnings("rawtypes")
     JComboBox userBox;
 
     public MetricConversion() {
@@ -71,7 +72,8 @@ public class MetricConversion implements ActionListener {
      */
     private static void runGUI() {
         JFrame.setDefaultLookAndFeelDecorated(true);
-        MetricConversion name = new MetricConversion();
+        @SuppressWarnings("unused")
+        MetricConversion conversion = new MetricConversion();
     }
 
     public static void main(String[] args) {

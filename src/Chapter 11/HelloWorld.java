@@ -34,6 +34,7 @@ public class HelloWorld {
 	*/
 	private static void runGUI() {
 		JFrame.setDefaultLookAndFeelDecorated(true);
+		@SuppressWarnings("unused")
 		HelloWorld greeting = new HelloWorld();
 	}
 

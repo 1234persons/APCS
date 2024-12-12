@@ -72,6 +72,7 @@ public class DivisibleByThree implements ActionListener {
 	 */
 	private static void runGUI() {
 		JFrame.setDefaultLookAndFeelDecorated(true);
+		@SuppressWarnings("unused")
 		DivisibleByThree divide = new DivisibleByThree();
 	}
 

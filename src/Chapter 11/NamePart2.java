@@ -57,6 +57,7 @@ public class NamePart2 implements ActionListener {
 	*/
 	private static void runGUI() {
 		JFrame.setDefaultLookAndFeelDecorated(true);
+		@SuppressWarnings("unused")
 		NamePart2 name = new NamePart2();
 	}
 

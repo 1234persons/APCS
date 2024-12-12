@@ -42,6 +42,7 @@ public class NumClicks implements ActionListener{
 	*/
 	private static void runGUI() {
 		JFrame.setDefaultLookAndFeelDecorated(true);
+		@SuppressWarnings("unused")
 		NumClicks clicker = new NumClicks();
 	}
 
