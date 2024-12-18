@@ -34,7 +34,13 @@ package GameOfLife;
          mainPanel = new JPanel();
          mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
          mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
- 
+        
+         userInput = new JPanel();
+         userInput.setLayout(new GridLayout(1,20,5,20));
+         userInput.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+         userInput.setAlignmentY(JPanel.TOP_ALIGNMENT);
+         mainPanel.add(userInput);
+
          /* Create a content pane with a GridLayout and empty borders */
          contentPane = new JPanel();
          contentPane.setLayout(new GridLayout(21, 20, 0, 0));
@@ -42,11 +48,22 @@ package GameOfLife;
          contentPane.setAlignmentY(JPanel.BOTTOM_ALIGNMENT);
          mainPanel.add(contentPane);
 
-         userInput = new JPanel();
-         userInput.setLayout(new GridLayout(1,3,10,30));
-         userInput.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-         userInput.setAlignmentY(JPanel.TOP_ALIGNMENT);
-         mainPanel.add(userInput);
+         rows = new JLabel("Rows: ");
+         rows.setAlignmentX(1);
+         rows.setAlignmentY(1);
+         userInput.add(rows);
+
+         rowEnter = new JTextField(10);
+         rowEnter.setAlignmentX(2);
+         rowEnter.setAlignmentY(1);
+         userInput.add(rowEnter);
+
+         cols = new JLabel("Columns: ");
+         cols.setAlignmentX(3);
+         cols.setAlignmentY(1);
+         userInput.add(cols);
+
+         
          
          /* Create and add buttons */
          lifeWorld = new JButton[X][Y];
@@ -68,7 +85,7 @@ package GameOfLife;
          contentPane.add(next);
  
          /* Add content pane to frame */
-         frame.setContentPane(contentPane);
+         frame.setContentPane(mainPanel);
  
          /* Size and then display the frame. */
          frame.pack();
