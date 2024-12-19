@@ -12,8 +12,8 @@ package GameOfLife;
  import java.awt.event.*;        
  
  public class LifeGUI implements ActionListener {
-     public static final int X = 20;
-     public static final int Y = 20;
+     public static int X;
+     public static int Y;
      JFrame frame;
      JPanel mainPanel;
      JPanel contentPane;
@@ -24,6 +24,7 @@ package GameOfLife;
      JLabel cols;
      JTextField rowEnter;
      JTextField colEnter;
+     JButton gridEnter;
      LifeWorld lifeGame = new LifeWorld();
          
      public LifeGUI() {
@@ -36,7 +37,7 @@ package GameOfLife;
          mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
          userInput = new JPanel();
-         userInput.setLayout(new GridLayout(1,20,5,20));
+         userInput.setLayout(new GridLayout(1,5,5,20));
          userInput.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
          userInput.setAlignmentY(JPanel.TOP_ALIGNMENT);
          mainPanel.add(userInput);
@@ -60,28 +61,23 @@ package GameOfLife;
 
          cols = new JLabel("Columns: ");
          cols.setAlignmentX(3);
-         cols.setAlignmentY(1);
          userInput.add(cols);
+         
+         colEnter = new JTextField(10);
+         colEnter.setAlignmentX(2);
+         userInput.add(colEnter);
 
-         
-         
-         /* Create and add buttons */
-         lifeWorld = new JButton[X][Y];
-         for (int xcoord = 0; xcoord < X; xcoord++) {
-             for (int ycoord = 0; ycoord < Y; ycoord++) {
-                 lifeWorld[xcoord][ycoord] = new JButton("O");
-                 lifeWorld[xcoord][ycoord].setActionCommand(xcoord + " " + ycoord);
-                 lifeWorld[xcoord][ycoord].addActionListener(new WorldGridListener());
-                 lifeWorld[xcoord][ycoord].setBackground(Color.BLACK);
-                 lifeWorld[xcoord][ycoord].setForeground(Color.WHITE);
-                     contentPane.add(lifeWorld[xcoord][ycoord]);
-               }
-           }
+         gridEnter = new JButton("Enter");
+         gridEnter.setAlignmentX(5);
+         gridEnter.addActionListener(this);
+         gridEnter.setActionCommand("setGrid");
+         userInput.add(gridEnter);
          
          /* add Next button */
          next = new JButton("Next");
          next.setActionCommand("next");
          next.addActionListener(this);
+         //next.setVisible(false);
          contentPane.add(next);
  
          /* Add content pane to frame */
@@ -100,6 +96,8 @@ package GameOfLife;
        */
         public void actionPerformed(ActionEvent event) {
             String eventName = event.getActionCommand();
+            X = Integer.parseInt(colEnter.getText());
+            X = Integer.parseInt(rowEnter.getText());
             String[][] next = new String[X][Y];
          
          if (eventName.equals("next")) {
@@ -109,6 +107,20 @@ package GameOfLife;
                      lifeWorld[xcoord][ycoord].setText(next[xcoord][ycoord]);
                    }
                }
+         }  else if (eventName.equals("setGrid")) {
+            /* Create and add buttons */
+         lifeWorld = new JButton[X][Y];
+         for (int xcoord = 0; xcoord < X; xcoord++) {
+             for (int ycoord = 0; ycoord < Y; ycoord++) {
+                 lifeWorld[xcoord][ycoord] = new JButton("O");
+                 lifeWorld[xcoord][ycoord].setActionCommand(xcoord + " " + ycoord);
+                 lifeWorld[xcoord][ycoord].addActionListener(new WorldGridListener());
+                 lifeWorld[xcoord][ycoord].setBackground(Color.BLACK);
+                 lifeWorld[xcoord][ycoord].setForeground(Color.WHITE);
+                     contentPane.add(lifeWorld[xcoord][ycoord]);
+               }
+           }
+           
          }
         }
         
