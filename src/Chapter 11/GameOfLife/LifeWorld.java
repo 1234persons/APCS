@@ -1,25 +1,25 @@
 package GameOfLife;
-
 /*
  * LifeWorld class
  */
  
  import java.util.Scanner;
  
- @SuppressWarnings("unused")
- 
-public class LifeWorld {
+ public class LifeWorld {
  	private String[][] world;
- 	private static final int x = 20;
- 	private static final int y = 20;
+ 	private static int x;
+ 	private static int y;
  	
  	/**
 	 * constructor
 	 * pre: none
 	 * post: A world has been initialized with no live cells
 	 */
-	public LifeWorld() {
+	public LifeWorld(int X, int Y) {
 		
+		x = X;
+		y = Y;
+
 		world = new String[x][y];
 		/* create a world with no living cells */
 		for (int xcoord = 0; xcoord < world.length; xcoord++) {
