@@ -4,166 +4,122 @@ package GameOfLife;
  * Chapter 11 Exercise 5
  * Lawrenceville Press
  */
+ 
+ 
+ import javax.swing.*;
+ import java.awt.*;
+ import java.awt.event.*;        
+ 
+ public class LifeGUI implements ActionListener {
+     public static final int X = 20;
+     public static final int Y = 20;
+     JFrame frame;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+     // Grid components
+     JPanel gridPane;
+     JButton[][] lifeWorld;
+     JButton next;
+     LifeWorld lifeGame = new LifeWorld();
 
-public class LifeGUI implements ActionListener {
-    public static int X;
-    public static int Y;
-    JFrame frame;
-    JPanel mainPanel;
-    JPanel contentPane;
-    JPanel userInput;
-    JButton[][] lifeWorld;
-    JButton next;
-    JLabel rows;
-    JLabel cols;
-    JTextField rowEnter;
-    JTextField colEnter;
-    JButton gridEnter;
-    LifeWorld lifeGame = new LifeWorld(X, Y);
-
-    public LifeGUI() {
-        /* Create and set up the frame */
-        frame = new JFrame("LifeGUI");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        userInput = new JPanel();
-        userInput.setLayout(new GridLayout(1, 5, 5, 20));
-        userInput.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        userInput.setAlignmentY(JPanel.TOP_ALIGNMENT);
-        mainPanel.add(userInput);
-
-        /* Create a content pane with a GridLayout and empty borders */
-        contentPane = new JPanel();
-        contentPane.setLayout(new GridLayout(21, 20, 0, 0));
-        contentPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        contentPane.setAlignmentY(JPanel.BOTTOM_ALIGNMENT);
-        mainPanel.add(contentPane);
-
-        rows = new JLabel("Rows: ");
-        rows.setAlignmentX(1);
-        userInput.add(rows);
-
-        rowEnter = new JTextField(10);
-        rowEnter.setAlignmentX(2);
-        userInput.add(rowEnter);
-
-        cols = new JLabel("Columns: ");
-        cols.setAlignmentX(3);
-        userInput.add(cols);
-
-        colEnter = new JTextField(10);
-        colEnter.setAlignmentX(2);
-        userInput.add(colEnter);
-
-        gridEnter = new JButton("Enter");
-        gridEnter.setAlignmentX(5);
-        gridEnter.setActionCommand("setGrid");
-        gridEnter.addActionListener(new gridGenerator());
-        userInput.add(gridEnter);
-
-        /* add Next button */
-        next = new JButton("Next");
-        next.setActionCommand("next");
-        next.addActionListener(this);
-        // next.setVisible(false);
-        contentPane.add(next);
-
-
-        /* Add content pane to frame */
-        frame.setContentPane(mainPanel);
-
-        /* Size and then display the frame. */
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    /**
-     * Handle Next button
-     * pre: none
-     * post: A new life world is displayed.
-     */
-    public void actionPerformed(ActionEvent event) {
-        String eventName = event.getActionCommand();
-        String[][] next = new String[X][Y];
-
-        if (eventName.equals("next")) {
-            next = lifeGame.nextDay();
-            for (int xcoord = 0; xcoord < X; xcoord++) {
-                for (int ycoord = 0; ycoord < Y; ycoord++) {
-                    lifeWorld[xcoord][ycoord].setText(next[xcoord][ycoord]);
-                }
-            }
-        }
-    }
-
-    class gridGenerator implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            X = Integer.parseInt(colEnter.getText());
-            Y = Integer.parseInt(rowEnter.getText());
-
-
-            /* Create and add buttons */
-            lifeWorld = new JButton[X][Y];
-            for (int xcoord = 0; xcoord < X; xcoord++) {
-                for (int ycoord = 0; ycoord < Y; ycoord++) {
-                    lifeWorld[xcoord][ycoord] = new JButton("O");
-                    lifeWorld[xcoord][ycoord].setActionCommand(xcoord + " " + ycoord);
-                    lifeWorld[xcoord][ycoord].addActionListener(new WorldGridListener());
-                    lifeWorld[xcoord][ycoord].setBackground(Color.BLACK);
-                    lifeWorld[xcoord][ycoord].setForeground(Color.WHITE);
-
-                    contentPane.add(lifeWorld[xcoord][ycoord]);
-                }
-            }
-        }
-    }
-
-    class WorldGridListener implements ActionListener {
-
-        /**
-         * Adds a live cell where the user clicks
-         * pre: btnCoords is a string with a integer followed by a space
-         * followed by a second integer.
-         * post: A live cell has been added.
-         */
+     // Grid generation compoenents
+     JPanel userPane = new JPanel();
+     JButton rowButton, colButton, enter = new JButton();
+     JTextField rowEnter, colEnter = new JTextField();
+     public LifeGUI() {
+         /* Create and set up the frame */
+         frame = new JFrame("LifeGUI");
+         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 
+         /* Create a content pane with a GridLayout and empty borders */
+         gridPane = new JPanel();
+         gridPane.setLayout(new GridLayout(21, 20, 0, 0));
+         gridPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+         
+         /* Create and add buttons */
+         lifeWorld = new JButton[X][Y];
+         for (int xcoord = 0; xcoord < X; xcoord++) {
+             for (int ycoord = 0; ycoord < Y; ycoord++) {
+                 lifeWorld[xcoord][ycoord] = new JButton("O");
+                 lifeWorld[xcoord][ycoord].setActionCommand(xcoord + " " + ycoord);
+                 lifeWorld[xcoord][ycoord].addActionListener(new WorldGridListener());
+                     gridPane.add(lifeWorld[xcoord][ycoord]);
+               }
+           }
+         
+         /* add Next button */
+         next = new JButton("Next");
+         next.setActionCommand("next");
+         next.addActionListener(this);
+         gridPane.add(next);
+ 
+         /* Add content pane to frame */
+         frame.setContentPane(gridPane);
+ 
+         /* Size and then display the frame. */
+         frame.pack();
+         frame.setVisible(true);
+     }
+     
+     
+     /**
+      * Handle Next button
+       * pre: none
+       * post: A new life world is displayed.
+       */
         public void actionPerformed(ActionEvent event) {
-            String btnCoords = event.getActionCommand();
-            int spacePosition, xcoord, ycoord;
-
-            spacePosition = btnCoords.indexOf(" ");
-            xcoord = Integer.parseInt(btnCoords.substring(0, spacePosition));
-            ycoord = Integer.parseInt(btnCoords.substring(spacePosition + 1));
-            lifeGame.addLiveCell(xcoord, ycoord); // add a live cell
-            lifeWorld[xcoord][ycoord].setText("X"); // show a live cell
+            String eventName = event.getActionCommand();
+            String[][] next = new String[X][Y];
+         
+         if (eventName.equals("next")) {
+             next = lifeGame.nextDay();
+             for (int xcoord = 0; xcoord < X; xcoord++) {
+                 for (int ycoord = 0; ycoord < Y; ycoord++) {
+                     lifeWorld[xcoord][ycoord].setText(next[xcoord][ycoord]);
+                   }
+               }
+         }
         }
-    }
-
-    /**
-     * Create and show the GUI.
-     */
-    private static void runGUI() {
-        JFrame.setDefaultLookAndFeelDecorated(true);
-
-        LifeGUI playLife = new LifeGUI();
-    }
-
-    public static void main(String[] args) {
-        /*
-         * Methods that create and show a GUI should be
-         * run from an event-dispatching thread
-         */
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                runGUI();
+        
+        
+        class WorldGridListener implements ActionListener {
+        
+            /**
+              * Adds a live cell where the user clicks
+             * pre: btnCoords is a string with a integer followed by a space
+             * followed by a second integer.
+             * post: A live cell has been added.
+             */
+            public void actionPerformed(ActionEvent event) {
+                String btnCoords = event.getActionCommand();
+                int spacePosition, xcoord, ycoord;
+                
+                spacePosition = btnCoords.indexOf(" ");
+                xcoord = Integer.parseInt(btnCoords.substring(0, spacePosition));
+                ycoord = Integer.parseInt(btnCoords.substring(spacePosition + 1));
+                lifeGame.addLiveCell(xcoord, ycoord);		//add a live cell
+                lifeWorld[xcoord][ycoord].setText("X");		//show a live cell
             }
-        });
-    }
-}
+     }
+         
+ 
+     
+     /**
+      * Create and show the GUI.
+      */
+     private static void runGUI() {
+         JFrame.setDefaultLookAndFeelDecorated(true);
+ 
+         LifeGUI playLife = new LifeGUI();
+     }
+      
+ 
+     public static void main(String[] args) {
+         /* Methods that create and show a GUI should be 
+            run from an event-dispatching thread */
+         javax.swing.SwingUtilities.invokeLater(new Runnable() {
+             public void run() {
+                 runGUI();
+             }
+         });
+     }
+ }

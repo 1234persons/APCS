@@ -7,19 +7,16 @@ package GameOfLife;
  
  public class LifeWorld {
  	private String[][] world;
- 	private static int x;
- 	private static int y;
+ 	private static final int x = 20;
+ 	private static final int y = 20;
  	
  	/**
 	 * constructor
 	 * pre: none
 	 * post: A world has been initialized with no live cells
 	 */
-	public LifeWorld(int X, int Y) {
+	public LifeWorld() {
 		
-		x = X;
-		y = Y;
-
 		world = new String[x][y];
 		/* create a world with no living cells */
 		for (int xcoord = 0; xcoord < world.length; xcoord++) {
