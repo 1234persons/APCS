@@ -1,4 +1,5 @@
 package GameOfLife;
+
 /*
  * LifeWorld class
  */
@@ -7,17 +8,14 @@ package GameOfLife;
  
  public class LifeWorld {
  	private String[][] world;
- 	private static final int x = 20;
- 	private static final int y = 20;
  	
  	/**
 	 * constructor
 	 * pre: none
 	 * post: A world has been initialized with no live cells
 	 */
-	public LifeWorld() {
-		
-		world = new String[x][y];
+	public LifeWorld(int X, int Y) {
+		world = new String[X][Y];
 		/* create a world with no living cells */
 		for (int xcoord = 0; xcoord < world.length; xcoord++) {
 			for (int ycoord = 0; ycoord < world[0].length; ycoord++) {
