@@ -8,6 +8,7 @@ package GameOfLife;
  
  public class LifeWorld {
  	private String[][] world;
+
  	
  	/**
 	 * constructor
