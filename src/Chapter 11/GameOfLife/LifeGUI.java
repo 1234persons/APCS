@@ -19,6 +19,7 @@ public class LifeGUI implements ActionListener {
     JPanel userPane;
     JLabel rowPrompt, colPrompt;
     JTextField rowEnter, colEnter;
+    JOptionPane win;
     JButton[][] lifeWorld;
     JButton next, enter;
     LifeWorld lifeGame;
@@ -89,6 +90,19 @@ public class LifeGUI implements ActionListener {
         if (eventName.equals("next")) {
 
             nextDay = lifeGame.nextDay();
+            
+            for (int xcoord = 0; xcoord < X; xcoord++) {
+                for (int ycoord = 0; ycoord < Y; ycoord++) {
+                    if (nextDay[xcoord][ycoord].equals("X")) {
+                        break;
+                    } else {
+                        win = new JOptionPane("Every cell is dead.");
+                        win.showMessageDialog(frame, "Every cell is dead", "Game over", 1);
+                        System.exit(1);
+                    }
+                }
+            }
+
             for (int xcoord = 0; xcoord < X; xcoord++) {
                 for (int ycoord = 0; ycoord < Y; ycoord++) {
                     lifeWorld[xcoord][ycoord].setText(nextDay[xcoord][ycoord]);
