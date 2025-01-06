@@ -3,6 +3,7 @@ package Midterm;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 
 public class DungeonsClient {
 
@@ -18,15 +19,19 @@ public class DungeonsClient {
         frame = new JFrame("Dungeons and Dragons");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        gridPane.setLayout(new GridLayout(10, 10, 5, 5));
+        gridPane.setLayout(new GridLayout(5, 5, 5, 5));
 
-        for (int x = 0; x < 10; x++) {
-            for (int y = 0; y < 10; y++) {
+        for (int x = 0; x < 5; x++) {
+            for (int y = 0; y < 5; y++) {
                 tiles[x][y] = new DungeonTile(x, y);
-                if (x == 5 || y == 5) {
+                Random rand = new Random();
+                int randX = rand.nextInt(5);
+                int randY = rand.nextInt(5);
+                if (x == randX && y == randY) {
+                    tiles[x][y].setItem("Rope");
                     dungeonTiles[x][y] = new JLabel(tiles[x][y].getIcon());
                 } else {
-                    dungeonTiles[x][y] = new JLabel(tiles[x][y].toString());
+                    dungeonTiles[x][y] = new JLabel(tiles[x][y].getIcon());
                 }
                 
                 gridPane.add(dungeonTiles[x][y]);

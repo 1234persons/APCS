@@ -7,7 +7,7 @@ public class DungeonTile {
 
     int xCord;
     int yCord;
-    Object tileItem;
+    String tileItem = "";
 
     public DungeonTile(int X, int Y) {
         xCord = X;
@@ -15,18 +15,31 @@ public class DungeonTile {
 
     }
 
-    public DungeonTile(int X, int Y, Object item) {
+    public DungeonTile(int X, int Y, String item) {
         xCord = X;
         yCord = Y;
         tileItem = item;
     }
 
-    public Icon getIcon() {
-        return(new ImageIcon("i:\\Downloads\\pixil-frame-0 (2).png"));
+    public void setItem(String item) {
+        tileItem = item;
     }
 
-    public String getItem() {
-        return (tileItem.getItem());
+    public Icon getIcon() {
+        if (tileItem.equals("Rope")) {
+            return(new ImageIcon("i:\\Downloads\\pixil-frame-0 (2).png"));
+        } else if (tileItem.equals("Arrow")) {
+            return(new ImageIcon("i:\\Downloads\\pixil-frame-0 (3).png"));
+        } else if (tileItem.equals("Pit")) {
+            return(new ImageIcon("i:\\Downloads\\pixil-frame-0 (4).png"));
+        } else {
+            return(new ImageIcon("i:\\Downloads\\pixilart-drawing (2).png"));
+        }
+    
+    }
+
+    public String toString() {
+        return ("Test");
     }
 
 }
