@@ -86,6 +86,7 @@ public class LifeGUI implements ActionListener {
         X = Integer.parseInt(colEnter.getText());
         Y = Integer.parseInt(rowEnter.getText());
         String[][] nextDay = new String[X][Y];
+        int cellNum = 0;
 
         if (eventName.equals("next")) {
 
@@ -93,21 +94,24 @@ public class LifeGUI implements ActionListener {
             
             for (int xcoord = 0; xcoord < X; xcoord++) {
                 for (int ycoord = 0; ycoord < Y; ycoord++) {
-                    if (nextDay[xcoord][ycoord].equals("X")) {
-                        break;
-                    } else {
-                        win = new JOptionPane("Every cell is dead.");
-                        win.showMessageDialog(frame, "Every cell is dead", "Game over", 1);
-                        System.exit(1);
-                    }
+                    lifeWorld[xcoord][ycoord].setText(nextDay[xcoord][ycoord]);
                 }
             }
 
             for (int xcoord = 0; xcoord < X; xcoord++) {
                 for (int ycoord = 0; ycoord < Y; ycoord++) {
-                    lifeWorld[xcoord][ycoord].setText(nextDay[xcoord][ycoord]);
+                    if (lifeWorld[xcoord][ycoord].getText().equals("X")) {
+                        cellNum++;
+                    }
                 }
             }
+
+            if (cellNum == 0) {
+                win = new JOptionPane("Every cell is dead.");
+                JOptionPane.showMessageDialog(frame, "Every cell is dead", "Game over", 1);
+                System.exit(1);
+            }
+
 
         } else if (eventName.equals("MakeWorld")) {
             lifeGame = new LifeWorld(X,Y);

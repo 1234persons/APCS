@@ -1,5 +1,6 @@
 package GameOfLife;
 
+
 /*
  * LifeWorld class
  */
