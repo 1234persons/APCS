@@ -2,38 +2,34 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class GameOfLightGUI {
+public class GameOfLight {
     JFrame frame;
     JPanel contentPane;
     JButton[][] lightBoard;
     int rows, columns;
 
-    public GameOfLightGUI() {
+    public GameOfLight() {
         // Create and set up the frame
         frame = new JFrame("Game of Light");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500,500); 
 
-        // Create a content pane with a GridLayout and empty borders
         contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout());
         contentPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // Create a panel for input fields
-        JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new FlowLayout());
+        JPanel userPanel = new JPanel();
+        userPanel.setLayout(new FlowLayout());
 
-        // Create a label and text field for rows
-        JLabel rowsLabel = new JLabel("Rows (3-9):");
+        JLabel rowsLabel = new JLabel("Rows:");
         JTextField rowsTextField = new JTextField(10);
-        inputPanel.add(rowsLabel);
-        inputPanel.add(rowsTextField);
+        userPanel.add(rowsLabel);
+        userPanel.add(rowsTextField);
 
-        // Create a label and text field for columns
-        JLabel columnsLabel = new JLabel("Columns (3-9):");
+        JLabel columnsLabel = new JLabel("Columns:");
         JTextField columnsTextField = new JTextField(10);
-        inputPanel.add(columnsLabel);
-        inputPanel.add(columnsTextField);
+        userPanel.add(columnsLabel);
+        userPanel.add(columnsTextField);
 
         // Create a button to start the game
         JButton startButton = new JButton("Start");
@@ -49,7 +45,7 @@ public class GameOfLightGUI {
             }
 
             // Remove the input panel
-            contentPane.remove(inputPanel);
+            contentPane.remove(userPanel);
 
             // Create a grid layout for the light board
             contentPane.setLayout(new GridLayout(rows, columns, 0, 0));
@@ -61,6 +57,7 @@ public class GameOfLightGUI {
                 for (int j = 0; j < columns; j++) {
                     lightBoard[i][j] = new JButton();
                     lightBoard[i][j].setPreferredSize(new Dimension(50, 50)); // Set preferred size to create equal-sized squares
+                    lightBoard[i][j].setBackground(Color.BLACK);
                     lightBoard[i][j].addActionListener(lightButtonListener);
                     contentPane.add(lightBoard[i][j]);
                 }
@@ -70,10 +67,10 @@ public class GameOfLightGUI {
             frame.setContentPane(contentPane);
 
         });
-        inputPanel.add(startButton);
+        userPanel.add(startButton);
 
         // Add the input panel to the content pane
-        contentPane.add(inputPanel);
+        contentPane.add(userPanel);
 
         // Add content pane to frame
         frame.setContentPane(contentPane);
@@ -104,10 +101,10 @@ public class GameOfLightGUI {
             }
 
             if (row != -1 && col != -1) {
-                if (button.getBackground() == Color.RED) {
+                if (button.getBackground() == Color.WHITE) {
                     button.setBackground(Color.BLACK);
                 } else {
-                    button.setBackground(Color.RED);
+                    button.setBackground(Color.WHITE);
                 }
 
                 // Toggle the state of the adjacent buttons
@@ -132,7 +129,7 @@ public class GameOfLightGUI {
                 boolean won = true;
                 for (int i = 0; i < rows; i++) {
                     for (int j = 0; j < columns; j++) {
-                        if (lightBoard[i][j].getBackground() != Color.RED) {
+                        if (lightBoard[i][j].getBackground() != Color.WHITE) {
                             won = false;
                             break;
                         }
@@ -148,15 +145,15 @@ public class GameOfLightGUI {
         }
 
         private void toggleButtonState(JButton button) {
-            if (button.getBackground() == Color.RED) {
+            if (button.getBackground() == Color.WHITE) {
                 button.setBackground(Color.BLACK);
             } else {
-                button.setBackground(Color.RED);
+                button.setBackground(Color.WHITE);
             }
         }
     };
 
     public static void main(String[] args) {
-        new GameOfLightGUI();
+        new GameOfLight();
     }
 }
