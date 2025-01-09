@@ -1,9 +1,9 @@
 package Midterm;
 
-public class Arrow extends Item {
+public class Arrow {
     
     public Arrow(int X, int Y) {
-        super(X, Y, "Arrow");
+        
     }
     
 }

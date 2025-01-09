@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 
+@SuppressWarnings("unused")
 public class DungeonsClient {
 
     // Grid components
@@ -23,31 +24,37 @@ public class DungeonsClient {
         int objectCount = 0;
         int randX = rand.nextInt(10);
         int randY = rand.nextInt(10);
+        for (int k = 0; k < 10; k++) {
+            randX = rand.nextInt(10);
+            randY = rand.nextInt(10);
+            for (int x = 0; x < 10; x++) {
 
-        for (int x = 0; x < 10; x++) {
-            for (int y = 0; y < 10; y++) {
+                System.out.println("Object: " + objectCount);
+                System.out.println("Random X: " + randX);
+                System.out.println("Random Y: " + randY);
+                for (int y = 0; y < 10; y++) {
 
-                randX = rand.nextInt(10);
-                randY = rand.nextInt(10);
-                
-                tiles[x][y] = new DungeonTile(x, y);
-                if (x == randX && y == randY && objectCount == 0) {
+                    tiles[x][y] = new DungeonTile(x, y);
+                    if ((x == randX && y == randY) && objectCount == 0) {
+                        tiles[x][y].setItem("rope");
+                        dungeonTiles[x][y] = new JLabel(tiles[x][y].getIcon());
+                        objectCount++;
+                        
+                    } else if (x == randX && y == randY && objectCount < 11) {
+                        tiles[x][y].setItem("pit");
+                        dungeonTiles[x][y] = new JLabel(tiles[x][y].getIcon());
+                        objectCount++;
 
-                    objectCount++;
-                    tiles[x][y].setItem("Rope");
-                    dungeonTiles[x][y] = new JLabel(tiles[x][y].getIcon());
 
-                } else if (x == randX && y == randY && objectCount < 11) {
-
-                    objectCount++;
-                    tiles[x][y].setItem("Pit");
-                    dungeonTiles[x][y] = new JLabel(tiles[x][y].getIcon());
-
-                } else {
-                    dungeonTiles[x][y] = new JLabel(tiles[x][y].getIcon());
+                    } else {
+                        dungeonTiles[x][y] = new JLabel(tiles[x][y].getIcon());
+                    }
+                    
+                    if (k < 1) {
+                    gridPane.add(dungeonTiles[x][y]);
+                    }
+                  
                 }
-
-                gridPane.add(dungeonTiles[x][y]);
             }
         }
 

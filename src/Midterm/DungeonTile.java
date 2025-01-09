@@ -26,13 +26,13 @@ public class DungeonTile {
     }
 
     public Icon getIcon() {
-        if (tileItem.equals("Rope")) {
-            ImageIcon icon = new ImageIcon(new ImageIcon("i:\\Downloads\\pixil-frame-0 (2).png").getImage().getScaledInstance(50, 50, 0));
+        if (tileItem.equals("rope")) {
+            ImageIcon icon = new ImageIcon(new ImageIcon("i:\\Downloads\\pixil-frame-0 (2).png").getImage().getScaledInstance(50, 40, 0));
             return(icon);      
-        } else if (tileItem.equals("Arrow")) {
+        } else if (tileItem.equals("arrow")) {
             ImageIcon icon = new ImageIcon(new ImageIcon("i:\\Downloads\\pixil-frame-0 (3).png").getImage().getScaledInstance(50, 50, 0));
             return(icon);  
-        } else if (tileItem.equals("Pit")) {
+        } else if (tileItem.equals("pit")) {
             ImageIcon icon = new ImageIcon(new ImageIcon("i:\\Downloads\\pixil-frame-0 (4).png").getImage().getScaledInstance(50, 50, 0));
             return(icon);  
         } else {
@@ -43,7 +43,7 @@ public class DungeonTile {
     }
 
     public String toString() {
-        return ("Test");
+        return (tileItem);
     }
 
 }
