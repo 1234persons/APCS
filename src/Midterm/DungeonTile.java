@@ -42,7 +42,7 @@ public class DungeonTile {
     
     }
 
-    public String toString() {
+    public String getItem() {
         return (tileItem);
     }
 
