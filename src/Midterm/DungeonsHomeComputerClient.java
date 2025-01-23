@@ -7,16 +7,13 @@ import java.awt.event.*;
 import java.util.Random;
 
 @SuppressWarnings("unused")
-public class DungeonsClient implements KeyListener {
+public class DungeonsHomeComputerClient implements KeyListener {
     public int ropeX, ropeY, arrowX, arrowY, dragonX, dragonY, plrX, plrY,
             ropeNum, arrowNum, prevPlrX, prevPlrY;
 
     public boolean shooting = false;
-    // final ImageIcon PLR_ICON = (new ImageIcon(new
-    // ImageIcon("i:\\Downloads\\pixil-frame-0
-    // (12).png").getImage().getScaledInstance(50, 50, 0))); // On school computer
-    final ImageIcon PLR_ICON = (new ImageIcon(new ImageIcon("c:\\Users\\Perso\\Downloads\\pixil-frame-0 (12).png")
-            .getImage().getScaledInstance(50, 50, 0))); // On home computer
+    final ImageIcon PLR_ICON = (new ImageIcon(new ImageIcon("i:\\Downloads\\pixil-frame-0 (12).png").getImage().getScaledInstance(50, 50, 0))); // On school computer
+    //final ImageIcon PLR_ICON = (new ImageIcon(new ImageIcon("c:\\Users\\Perso\\Downloads\\pixil-frame-0 (12).png").getImage().getScaledInstance(50, 50, 0))); // On home computer
 
     Random rand = new Random();
     // MAIN PANEL
@@ -31,7 +28,7 @@ public class DungeonsClient implements KeyListener {
     JPanel userPane = new JPanel();
     JLabel arrowLabel, ropeLabel, alertLabel;
 
-    public DungeonsClient() {
+    public DungeonsHomeComputerClient() {
         ropeX = 11;
         ropeY = 11;
 
@@ -182,7 +179,7 @@ public class DungeonsClient implements KeyListener {
     private static void runGUI() {
         JFrame.setDefaultLookAndFeelDecorated(true);
 
-        DungeonsClient playDAndD = new DungeonsClient();
+        DungeonsHomeComputerClient playDAndD = new DungeonsHomeComputerClient();
     }
 
     public static void main(String[] args) {
@@ -393,8 +390,8 @@ public class DungeonsClient implements KeyListener {
             } else {
                 JOptionPane.showMessageDialog(frame, "You use the rope to get out, but lose the rope in the process.");
                 ropeNum--;
-                dungeonTiles[plrY][plrX].setIcon(new ImageIcon(new ImageIcon("c:\\Users\\Perso\\Downloads\\pixilart-drawing (2).png").getImage().getScaledInstance(50, 50, 0))); // On home computer
-                // dungeonTiles[plrY][plrX].setIcon(new ImageIcon(newImageIcon("i:\\Downloads\\pixilart-drawing (2).png").getImage().getScaledInstance(50, 50, 0))); On School Computer
+                //dungeonTiles[plrY][plrX].setIcon(new ImageIcon(new ImageIcon("c:\\Users\\Perso\\Downloads\\pixilart-drawing (2).png").getImage().getScaledInstance(50, 50, 0))); // On home computer
+                dungeonTiles[plrY][plrX].setIcon(new ImageIcon(new ImageIcon("i:\\Downloads\\pixilart-drawing (2).png").getImage().getScaledInstance(50, 50, 0)));
                 System.out.println("plrX: " + plrX);
                 System.out.println("plrY: " + plrY);
                 System.out.println("prevplrX: " + prevPlrX);
