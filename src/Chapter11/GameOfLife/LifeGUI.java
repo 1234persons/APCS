@@ -166,6 +166,7 @@ public class LifeGUI implements ActionListener {
     private static void runGUI() {
         JFrame.setDefaultLookAndFeelDecorated(true);
 
+        @SuppressWarnings("unused")
         LifeGUI playLife = new LifeGUI();
     }
 

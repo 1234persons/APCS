@@ -23,5 +23,6 @@ public class MyFilePart1 {
         } else {
             System.out.println("The file doesn't exist.");
         }
+        input.close();
     }
 }

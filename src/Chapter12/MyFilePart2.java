@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class MyFilePart2 {
     public static void main(String[] args) {
-        File zzz = new File("zzz.txt"); 
+        File zzz = new File("i:\\zzz.txt"); 
         String userInput;
         Scanner input = new Scanner(System.in);
             
@@ -33,5 +33,7 @@ public class MyFilePart2 {
             zzz.delete();
             System.out.println("The file has been deleted.");
         }
+        input.close();
+
     }
 }

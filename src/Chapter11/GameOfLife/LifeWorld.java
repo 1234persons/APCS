@@ -5,7 +5,6 @@ package GameOfLife;
  * LifeWorld class
  */
  
- import java.util.Scanner;
  
  public class LifeWorld {
  	private String[][] world;
