@@ -1,5 +1,4 @@
 package Chapter12.BankFolder;
-
 /**
  * Bank class.
  */
@@ -73,8 +72,7 @@ package Chapter12.BankFolder;
          Account newAcct;
          double bal;
          String fName, lName;
-         @SuppressWarnings("resource")
-        Scanner input = new Scanner(System.in);
+         Scanner input = new Scanner(System.in);
          
          System.out.print("First name: ");
          fName = input.nextLine();

@@ -1,5 +1,4 @@
 package Chapter12.BankFolder;
-
 /**
  * Account class.
  */
@@ -7,8 +6,7 @@ package Chapter12.BankFolder;
  import java.io.*; 
  import java.text.NumberFormat;
  
- @SuppressWarnings("unused")
-public class Account  {
+ public class Account  {
      private double balance;
      private Customer cust;
      private String acctID;
@@ -54,19 +52,23 @@ public class Account  {
       * pre: none
       * post: The account balance has been returned.
       */
-     public double getBalance() {
-          return(balance);
-     }
+    public double getBalance() {
+        if (balance <= 20) {
+            System.out.println("Low balance");
+        }
+        return(balance);
+    }
  
  
-     /** 
-      * A deposit is made to the account.
-      * pre: none
-      * post: The balance has been increased by the amount of the deposit.
-      */
-     public void deposit(double amt) {
-          balance += amt;
-     }
+    /** 
+     * A deposit is made to the account.
+     * pre: none
+     * post: The balance has been increased by the amount of the deposit.
+     */
+    public void deposit(double amt) {
+        balance += amt;
+        
+    }
  
      
      /** 
@@ -112,6 +114,9 @@ public class Account  {
          accountString = acctID + "\n";
          accountString += cust.toString();
          accountString += "Current balance is " + money.format(balance);
+         if (balance <= 20) {
+            System.out.println("Low balance");
+        }
           return(accountString);
      }
  }

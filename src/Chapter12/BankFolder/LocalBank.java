@@ -1,5 +1,4 @@
 package Chapter12.BankFolder;
-
 /*
  * LocalBank2.java
  * Chapter 12, LocalBank2 review
@@ -17,9 +16,8 @@ package Chapter12.BankFolder;
  public class LocalBank {
 
 	public static void main(String[] args) {
-		File accountsFile = new File("LBAccounts.dat");
+		File accountsFile = new File("i:\\LBAccounts");
 		Bank easySave = new Bank(accountsFile);
-		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		String action, acctID;
 		Double amt;
