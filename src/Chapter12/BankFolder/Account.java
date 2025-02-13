@@ -22,6 +22,9 @@ package Chapter12.BankFolder;
          balance = bal;
          cust = new Customer(fName, lName);
          acctID = fName.substring(0,1) + lName;
+         if (balance <= 20) {
+            System.out.println("Low balance");
+        }
      }
      
  
@@ -67,6 +70,9 @@ package Chapter12.BankFolder;
      */
     public void deposit(double amt) {
         balance += amt;
+        if (balance <= 20) {
+            System.out.println("Low balance");
+        }
         
     }
  
@@ -79,6 +85,9 @@ package Chapter12.BankFolder;
      public void withdrawal(double amt) {
           if (amt <= balance) {
               balance -= amt;
+              if (balance <= 20) {
+                System.out.println("Low balance");
+            }
           } else {
               System.out.println("Not enough money in account.");
           }

@@ -11,6 +11,7 @@ package Chapter12.BankFolder;
      
      private ArrayList<Account> accounts;
      private int numAccts;
+     public static int numLowAcct;
      
          
      /**
@@ -181,6 +182,7 @@ package Chapter12.BankFolder;
                  writeAccts.writeObject(acct);
              }
              writeAccts.close();
+             System.out.println("Number of low balance accounts: " + numLowAcct);
          } catch (FileNotFoundException e) {
              System.out.println("File could not be found.");
              System.err.println("FileNotFoundException: " + e.getMessage());
