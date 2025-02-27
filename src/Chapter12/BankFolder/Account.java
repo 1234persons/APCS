@@ -3,10 +3,11 @@ package Chapter12.BankFolder;
  * Account class.
  */
 
- import java.io.*; 
- import java.text.NumberFormat;
+
+ import java.io.Serializable;
+import java.text.NumberFormat;
  
- public class Account  {
+ public class Account  implements Serializable{
      private double balance;
      private Customer cust;
      private String acctID;
@@ -22,9 +23,7 @@ package Chapter12.BankFolder;
          balance = bal;
          cust = new Customer(fName, lName);
          acctID = fName.substring(0,1) + lName;
-         if (balance <= 20) {
-            System.out.println("Low balance");
-        }
+         
      }
      
  
@@ -70,11 +69,10 @@ package Chapter12.BankFolder;
      */
     public void deposit(double amt) {
         balance += amt;
-        if (balance <= 20) {
-            System.out.println("Low balance");
+
         }
         
-    }
+    
  
      
      /** 
@@ -85,9 +83,7 @@ package Chapter12.BankFolder;
      public void withdrawal(double amt) {
           if (amt <= balance) {
               balance -= amt;
-              if (balance <= 20) {
-                System.out.println("Low balance");
-            }
+              
           } else {
               System.out.println("Not enough money in account.");
           }
@@ -123,9 +119,7 @@ package Chapter12.BankFolder;
          accountString = acctID + "\n";
          accountString += cust.toString();
          accountString += "Current balance is " + money.format(balance);
-         if (balance <= 20) {
-            System.out.println("Low balance");
-        }
+         
           return(accountString);
      }
  }

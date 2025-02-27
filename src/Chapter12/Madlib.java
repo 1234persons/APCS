@@ -51,7 +51,7 @@ public class Madlib {
         ArrayList<String> nouns = new ArrayList<String>();
 
         try {
-            File file = new File("I:\\Downloads\\nouns.txt");
+            File file = new File("I:\\nouns.txt");
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -70,7 +70,7 @@ public class Madlib {
         ArrayList<String> verbs = new ArrayList<String>();
 
         try {
-            File file = new File("I:\\Downloads\\verbs.txt");
+            File file = new File("I:\\verbs.txt");
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();

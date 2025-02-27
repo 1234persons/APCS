@@ -21,7 +21,7 @@ package Chapter12.BankFolder;
 		Scanner input = new Scanner(System.in);
 		String action, acctID;
 		Double amt;
-				
+		
 		/* display menu of choices */
 		do {
 			System.out.println("\nDeposit\\Withdrawal\\Check balance");

@@ -7,11 +7,12 @@ package Chapter12.BankFolder;
  import java.io.*;
  import java.util.Scanner;
  
- public class Bank {
+ public class Bank implements Serializable{
      
      private ArrayList<Account> accounts;
      private int numAccts;
      public static int numLowAcct;
+   
      
          
      /**
@@ -39,6 +40,7 @@ package Chapter12.BankFolder;
                  FileInputStream in = new FileInputStream(acctsFile);
                  ObjectInputStream readAccts = new ObjectInputStream(in);
                  numAccts = (int)readAccts.readInt();
+                 numLowAcct = (int)readAccts.readInt();
                  
                  if (numAccts == 0) {
                      System.out.println("There are no existing accounts.");
@@ -50,10 +52,12 @@ package Chapter12.BankFolder;
                      }
                  }
                  readAccts.close();
+                 in.close();
              } catch (FileNotFoundException e) {
                  System.out.println("File could not be found.");
                  System.err.println("FileNotFoundException: " + e.getMessage());
              } catch (IOException e) {
+                System.out.println(1);
                  System.out.println("Problem with input/output.");
                  System.err.println("IOException: " + e.getMessage());
              } catch (ClassNotFoundException e) {
@@ -133,11 +137,12 @@ package Chapter12.BankFolder;
                   acct.deposit(amt);
                   accounts.set(acctIndex, acct);			//replace object with updated object
                   System.out.println(acct);
+                  
               } else if (transCode == 2) {
                   acct.withdrawal(amt);
                   accounts.set(acctIndex, acct);			//replace object with updated object
                   System.out.println(acct);
-                  
+
               }
           } else {
               System.out.println("Account does not exist.");
@@ -173,16 +178,23 @@ package Chapter12.BankFolder;
       */
      public void updateAccounts(File acctsFile) {
          
+        numLowAcct = 0;
+        for (int account = 0; account < accounts.size(); account++) {
+            if (accounts.get(account).getBalance() < 20) {
+                numLowAcct++;
+            }
+        }
+        System.out.println("There are " + numLowAcct + " accounts with low balances");
          try {
              FileOutputStream out = new FileOutputStream(acctsFile);
              ObjectOutputStream writeAccts = new ObjectOutputStream(out);
              writeAccts.writeInt(numAccts);
-             
+             writeAccts.writeInt(numLowAcct);
              for (Account acct : accounts){
                  writeAccts.writeObject(acct);
              }
              writeAccts.close();
-             System.out.println("Number of low balance accounts: " + numLowAcct);
+             out.close();
          } catch (FileNotFoundException e) {
              System.out.println("File could not be found.");
              System.err.println("FileNotFoundException: " + e.getMessage());
@@ -191,4 +203,6 @@ package Chapter12.BankFolder;
              System.err.println("IOException: " + e.getMessage());
          } 
      }
+
+     
  }

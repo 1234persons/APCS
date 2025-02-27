@@ -6,7 +6,7 @@ package Chapter12.BankFolder;
 
  import java.io.*;
 
- public class Customer  {
+ public class Customer  implements Serializable{
      private String firstName, lastName;
          
      
