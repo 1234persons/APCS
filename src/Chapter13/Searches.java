@@ -40,7 +40,7 @@ public class Searches {
         }
     }
 
-    public static int BinarySearch2(int[] items, int start, int end, int goal) {
+    public static int binarySearch2(int[] items, int start, int end, int goal) {
         //searches with the method in a do-while loop and replaces recursive calls with appropriate start and end values
         int mid, counter = 0;
         do {
@@ -58,7 +58,7 @@ public class Searches {
         return mid;
     }
 
-    public static int TernarySearch (int[] items, int start, int end, int goal) {
+    public static int ternarySearch (int[] items, int start, int end, int goal) {
         int counter = 0;
         if (start > end) {
             return (-1);
@@ -73,11 +73,11 @@ public class Searches {
                 System.out.println(counter);
                 return (twoThirds);
             } else if (goal < items[oneThird]) {
-                return (TernarySearch(items, start, oneThird - 1, goal));
+                return (ternarySearch(items, start, oneThird - 1, goal));
             } else if (goal < items[twoThirds]) {
-                return (TernarySearch(items, oneThird + 1, twoThirds - 1, goal));
+                return (ternarySearch(items, oneThird + 1, twoThirds - 1, goal));
             } else {
-                return (TernarySearch(items, twoThirds + 1, end, goal));
+                return (ternarySearch(items, twoThirds + 1, end, goal));
             }
         }
     }
