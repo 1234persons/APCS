@@ -1,6 +1,5 @@
 package Chapter13;
 
-
 import java.util.Scanner;
 
 public class Knapsack {
@@ -44,7 +43,6 @@ public class Knapsack {
         System.out.println(fillKnapsack(weights, goal, 0));
     }
 
-
     public static boolean fillKnapsack(int[] weights, int goal, int index) {
         if (goal == 0) {
             return true;
@@ -57,21 +55,19 @@ public class Knapsack {
         return fillKnapsack(weights, goal - weights[index], index + 1) || fillKnapsack(weights, goal, index + 1);
     }
 
-
-public static boolean loadSack(int[] weights, int goalWeight, int start) {
-    if (goalWeight == 0) {
-        return(true);
-    } else if (start >= weights.length) {
-           return(false);
-       } else {
-           if (loadSack(weights, goalWeight, start + 1)) {
-               return(true);
-           } else if (loadSack(weights, goalWeight - weights[start], start + 1)) {
-               return(true);
-           } else {
-               return(false);
-           }
+    public static boolean loadSack(int[] weights, int goalWeight, int start) {
+        if (goalWeight == 0) {
+            return (true);
+        } else if (start >= weights.length) {
+            return (false);
+        } else {
+            if (loadSack(weights, goalWeight, start + 1)) {
+                return (true);
+            } else if (loadSack(weights, goalWeight - weights[start], start + 1)) {
+                return (true);
+            } else {
+                return (false);
+            }
+        }
     }
 }
-}
-

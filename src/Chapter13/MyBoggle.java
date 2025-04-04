@@ -3,7 +3,7 @@ package Chapter13;
 import java.util.Scanner;
 
 public class MyBoggle {
-    final static boolean SUPPORT_DIAGONAL = true;
+    //final static boolean SUPPORT_DIAGONAL = true;
 
     public static void main(String[] args) {
         char[][] board = generateBoard(5);
@@ -80,7 +80,7 @@ public class MyBoggle {
             findWord(board, word, visited, i, j + 1, index + 1) ||
             findWord(board, word, visited, i, j - 1, index + 1) ||
             (
-                SUPPORT_DIAGONAL && (
+               (
                     findWord(board, word, visited, i + 1, j + 1, index + 1) ||
                     findWord(board, word, visited, i - 1, j - 1, index + 1) ||
                     findWord(board, word, visited, i + 1, j - 1, index + 1) ||
