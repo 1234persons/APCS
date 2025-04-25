@@ -3,6 +3,8 @@ package Chapter13;
 import java.util.Scanner;
 
 public class Knapsack {
+    public static int[] filledSack = new int[6];
+
     public static void main(String[] args) {
         int[] weights = new int[6];
         int sum = 0;
@@ -40,19 +42,20 @@ public class Knapsack {
         scanner.close();
 
         System.out.println("Goal: " + goal);
-        System.out.println(fillKnapsack(weights, goal, 0));
-    }
-
-    public static boolean fillKnapsack(int[] weights, int goal, int index) {
-        if (goal == 0) {
-            return true;
+        System.out.println(loadSack(weights, goal, 0));
+        for (int i = 0; i < weights.length; i++) {
+            int[] tempArray = weights.clone();
+            tempArray[i] = 0;
+            if (loadSack(tempArray, goal, 0)) {
+                weights[i] = 0;
+            }
         }
 
-        if (goal < 0 || index >= weights.length) {
-            return false;
+        for (int i = 0; i < weights.length; i++) {
+            if (weights[i] != 0) {
+                System.out.print(weights[i] + " ");
+            }
         }
-
-        return fillKnapsack(weights, goal - weights[index], index + 1) || fillKnapsack(weights, goal, index + 1);
     }
 
     public static boolean loadSack(int[] weights, int goalWeight, int start) {
@@ -70,4 +73,5 @@ public class Knapsack {
             }
         }
     }
+
 }

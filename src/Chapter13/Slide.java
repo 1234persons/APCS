@@ -69,6 +69,25 @@ package Chapter13;
                      collectCells(row - 1, col + 1));
          }
      }
+
+     private int collectColoredCells(int row, int col, char color) {
+        
+        if ((row < 0) || (row >= slideData.length) || (col < 0) || (col >= slideData[0].length)
+                || (slideData[row][col] != color)) {
+            return (0);
+        } else {
+            slideData[row][col] = '0';
+            return (1 +
+                    collectColoredCells(row + 1, col, color) +
+                    collectColoredCells(row - 1, col, color) +
+                    collectColoredCells(row, col + 1, color) +
+                    collectColoredCells(row, col - 1, color) +
+                    collectColoredCells(row + 1, col + 1, color) +
+                    collectColoredCells(row - 1, col - 1, color) +
+                    collectColoredCells(row + 1, col - 1, color) +
+                    collectColoredCells(row - 1, col + 1, color));
+        }
+    }
  
      /**
       * Analyzes a slide for colonies and displays colony data
@@ -77,12 +96,14 @@ package Chapter13;
       */
      public void displayColonies() {
          int count;
+         char color;
  
          for (int row = 0; row < slideData.length; row++) {
              for (int col = 0; col < slideData[0].length; col++) {
-                 if (slideData[row][col] == COLONY) {
-                     count = collectCells(row, col);
-                     System.out.println("Colony at (" + row + "," + col + ") with size " + count);
+                 if (slideData[row][col] != '0') {
+                     color = slideData[row][col];
+                     count = collectColoredCells(row, col, color);
+                     System.out.println("Colony at (" + row + "," + col + ") with size " + count + " and color " + color);
                  }
              }
          }
