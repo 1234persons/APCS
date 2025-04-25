@@ -6,6 +6,6 @@ public class DetectColonies2 {
 
         Slide culture = new Slide("I:\\colored_slide.txt");
         culture.displaySlide();
-        culture.displayColonies();
+        culture.displayColoredColonies();
     }
 }
