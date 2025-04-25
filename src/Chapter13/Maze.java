@@ -21,13 +21,19 @@ public class Maze {
             visited = new boolean[length][width];
             slideData = new String[length][width];
             for (int row = 0; row < length; row++) {
+                String tempString = readSlide.readLine() + " ";
                 for (int col = 0; col < width; col++) {
-                    slideData[row][col] = Integer.toString(readSlide.read());
+                    slideData[row][col] = tempString.substring(col, col + 1);
+                    visited[row][col] = false;
+                    System.out.print(slideData[row][col]);
 
                 }
-                readSlide.readLine(); // read past end-of-line characters
+                System.out.println(); // read past end-of-line characters
             }
             pathFound = findPath(slideData, visited, 1, 1, "");
+            if (pathFound) {
+                System.out.println("Path Found.");
+            }
 
             readSlide.close();
             in.close();
@@ -43,32 +49,38 @@ public class Maze {
 
     public static boolean findPath(String[][] data, boolean[][] visited, int row, int col, String solution) {
 
-        if (row > 7 || col > 7 || row < 0 || col < 0) {
+        if (row > 7 || col > 10 || row < 0 || col < 0 || visited[row][col]) {
             return (false);
-        } else if (visited[row][col]) {
-            return (false);
-
         }
 
         solution += "(" + row + ", " + col + ") ";
-
         visited[row][col] = true;
+        
 
         if (data[row][col].equalsIgnoreCase("X")) {
             return (false);
 
-        } else if (data[row][col].equals("$")) {
-            return (true);
-
-        } else if (findPath(data, visited, row + 1, col, solution) && !visited[row + 1][col] ||
-                findPath(data, visited, row - 1, col, solution) && !visited[row - 1][col] ||
-                findPath(data, visited, row, col + 1, solution) && !visited[row][col + 1] ||
-                findPath(data, visited, row, col - 1, solution) && !visited[row][col - 1]) {
-                    System.out.println(solution);
-            return (true);
-
-        } else {
-            return (false);
         }
+        if (data[row][col].equals("$")) {
+            System.out.println(solution);
+            return (true);
+        }
+
+        if (findPath(data, visited, row + 1, col, solution) || !visited[row + 1][col]) {
+            return (true);
+        }
+
+        if (findPath(data, visited, row - 1, col, solution) || !visited[row - 1][col]) {
+            return (true);
+        }
+
+        if (findPath(data, visited, row, col + 1, solution) || !visited[row][col + 1]) {
+            return (true);
+        }
+        if (findPath(data, visited, row, col - 1, solution) || !visited[row][col - 1]) {
+            return (true);
+        }
+       
+        return (false);
     }
 }
