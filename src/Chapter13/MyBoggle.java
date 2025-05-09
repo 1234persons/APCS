@@ -6,7 +6,7 @@ public class MyBoggle {
     //final static boolean SUPPORT_DIAGONAL = true;
 
     public static void main(String[] args) {
-        char[][] board = generateBoard(5);
+        char[][] board = generateBoard(100);
         printBoard(board);
 
         Scanner scanner = new Scanner(System.in);
