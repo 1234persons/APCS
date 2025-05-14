@@ -21,27 +21,26 @@ public class DPoly {
 
     void createPolygon() {
         drawablePolygon = new PolygonObject(new double[x.length], new double[x.length], c);
-
     }
 
     void updatePolygon() {
         newX = new double[x.length];
 		newY = new double[x.length];
 		draw = true;
-		for(int i=0; i<x.length; i++)
+		for(int i=0; i < x.length; i++)
 		{
 			CalcPos = PointCalc.calculatePositionP(Screen.viewFrom, Screen.viewTo, x[i], y[i], z[i]);
 			newX[i] = (Main.screenSize.getWidth()/2 - PointCalc.calcFocusPos[0]) + CalcPos[0] * Screen.zoom;
-			newY[i] = (Main.screenSize.getHeight()/2 - PointCalc.calcFocusPos[1]) + CalcPos[1] * Screen.zoom;			
+			newY[i] = (Main.screenSize.getHeight()/2 - PointCalc.calcFocusPos[1]) + CalcPos[1] * Screen.zoom;	
 			if(PointCalc.t <= 0)
 				draw = false;
 		}
-
 		
 		drawablePolygon.draw = draw;
 		drawablePolygon.update2gon(newX, newY);
 		avgDist = getDist();
     }
+
 
     double getDist() {
 

@@ -35,8 +35,10 @@ public class PolygonObject {
             g.setColor(c);
             g.fillPolygon(p);
             g.setColor(Color.BLACK);
-            g.drawPolygon(p); 
+            g.drawPolygon(p);  
         }
+            
+        
         
 
     }

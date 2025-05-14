@@ -1,11 +1,8 @@
 package Final;
 
 import javax.swing.JPanel;
-import javax.swing.text.View;
-
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -14,7 +11,6 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
@@ -23,14 +19,15 @@ import java.util.ArrayList;
 
 public class Screen extends JPanel implements KeyListener, MouseMotionListener, MouseWheelListener {
 
-    double sleepTime = 1000 / 30, lastRefresh = 0;
+    double sleepTime = 1000 / 60, lastRefresh = 0;
     static double[] viewFrom = new double[] { 7, 7, 1 };
     static double[] viewTo = new double[] { 1,1,0 };
     static ArrayList<DPoly> dPolygons = new ArrayList<DPoly>();
     static ArrayList<testGeometry> shapes = new ArrayList<testGeometry>();
+    static ArrayList<Rectangle> colRects = new ArrayList<Rectangle>();
     int[] newOrder;
     boolean[] keys = new boolean[6];
-    static double zoom = 1000, minZoom = 500, maxZoom = 2500, mouseX = 0, mouseY = -100, moveSpeed = 1;
+    static double zoom = 1000, minZoom = 500, maxZoom = 2500, mouseX = 0, mouseY = -100, moveSpeed = 2;
     double vertLook = 0, horLook = 0, horRotSpd = 900, vertRotSpd = 2200;
     boolean gravity = false;
 
@@ -45,12 +42,9 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
     }
 
     public void paintComponent(Graphics g) {
-        
-        
         g.setColor(new Color(140, 180, 180));
         g.fillRect(0, 0, (int)Main.screenSize.getWidth(), (int)Main.screenSize.getHeight());
-        g.drawString(System.currentTimeMillis() + "", 20, 20);
-
+        
         controls();
         PointCalc.setStartingInfo();
         setOrder();
@@ -65,8 +59,9 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
         
         for (int i = 0; i < newOrder.length; i++) {
             dPolygons.get(newOrder[i]).drawablePolygon.drawPolygon(g);
-           
+
         }
+        g.drawString(System.currentTimeMillis() + "", 20, 20);
         updateView();
         sleepAndRefresh();
     }
@@ -91,9 +86,12 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
         shapes.add(new testGeometry(0, 0, 0, 5, 5, 5, Color.gray));
         shapes.add(new testGeometry(0,0, 0, 10, 10, 0, Color.green));
 
-        for (int i = 0; i < 100; i++) {
-            shapes.add(new testGeometry(i,0, 0, 1, 1, 0, Color.green));
-            shapes.add(new testGeometry(0, i, 0, 1, 1, 0, Color.red));
+        for (int i = -10; i < 10; i++) {
+            for (int j = -10; j < 10; j++) {
+                shapes.add(new testGeometry(i,0, 0, 1, 1, 0, Color.green));
+                shapes.add(new testGeometry(0, i, 0, 1, 1, 0, Color.red));
+            }
+            
             
         }
         
@@ -169,11 +167,7 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
     }
 
     boolean collisionDetection() {
-        for (int i = 0; i < dPolygons.size(); i++) {
-            if (dPolygons.get(i).avgDist - 2 < 0) {
-                return(true);
-            }
-        }
+        
         return(false);
     }
 
