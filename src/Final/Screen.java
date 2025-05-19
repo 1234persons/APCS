@@ -26,8 +26,8 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
     static ArrayList<testGeometry> shapes = new ArrayList<testGeometry>();
     static ArrayList<Rectangle> colRects = new ArrayList<Rectangle>();
     int[] newOrder;
-    boolean[] keys = new boolean[6];
-    static double zoom = 1000, minZoom = 500, maxZoom = 2500, mouseX = 0, mouseY = -100, moveSpeed = 2;
+    static boolean[] keys = new boolean[6];
+    static double zoom = 1000, minZoom = 500, maxZoom = 2500, mouseX = 0, mouseY = -100, moveSpeed = 1;
     double vertLook = 0, horLook = 0, horRotSpd = 900, vertRotSpd = 2200;
     boolean gravity = false;
 
@@ -82,9 +82,18 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
                 
     }
 
+    static void checkCollision(Rectangle r) {
+        // if (r.intersects(new Rectangle((int)viewFrom[0], (int)viewFrom[1], (int)viewFrom[0] - 2, (int)viewFrom[1] - 2))) {
+        //     for (int i = 0; i < keys.length; i++) {
+        //         if (keys[i]) {
+        //             keys[i] = false;
+        //         }
+        //     }
+        // }
+    }
+
     void makeWorld() {
-        shapes.add(new testGeometry(0, 0, 0, 5, 5, 5, Color.gray));
-        shapes.add(new testGeometry(0,0, 0, 10, 10, 0, Color.green));
+        shapes.add(new testGeometry(1, 1, 1, 5, 2, 1, getBackground()));
 
         for (int i = -10; i < 10; i++) {
             for (int j = -10; j < 10; j++) {
@@ -166,19 +175,14 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
         moveTo(viewFrom[0] + moveVector.x*moveSpeed, viewFrom[1] + moveVector.y*moveSpeed, viewFrom[2] + moveVector.z*moveSpeed);
     }
 
-    boolean collisionDetection() {
-        
-        return(false);
-    }
-
     void moveTo(double x, double y, double z) {
         viewFrom[0] = x;
         viewFrom[1] = y;
         viewFrom[2] = z;
-
-        // if (!collisionDetection()) {
-        //     viewFrom[2]--;
-        // }
+        for (int i = 0; i < PolygonObject.colRects.size(); i++) {
+            checkCollision(PolygonObject.colRects.get(i));
+        }
+    
         
         updateView();
     }

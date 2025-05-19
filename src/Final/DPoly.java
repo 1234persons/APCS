@@ -20,7 +20,7 @@ public class DPoly {
     }
 
     void createPolygon() {
-        drawablePolygon = new PolygonObject(new double[x.length], new double[x.length], c);
+        drawablePolygon = new PolygonObject(x, y, c);
     }
 
     void updatePolygon() {

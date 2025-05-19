@@ -1,8 +1,11 @@
 package Final;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.awt.Rectangle;
+import java.util.ArrayList;
 
 
 public class PolygonObject {
@@ -11,6 +14,7 @@ public class PolygonObject {
     Color c;
     double avgsdist = 0;
     boolean draw = true;
+    static ArrayList<Rectangle> colRects = new ArrayList<Rectangle>();
     public PolygonObject(double[] x, double[] y, Color c) {
         p = new Polygon();
         
@@ -25,6 +29,7 @@ public class PolygonObject {
         for (int i = 0; i < x.length; i++) {
             p.xpoints[i] = (int) x[i];
             p.ypoints[i] = (int) y[i];
+            colRects.add(p.getBounds());
             p.npoints = (int) x.length;
         }
 
@@ -32,6 +37,7 @@ public class PolygonObject {
 
     void drawPolygon(Graphics g) {
         if (draw) {
+
             g.setColor(c);
             g.fillPolygon(p);
             g.setColor(Color.BLACK);
