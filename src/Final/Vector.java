@@ -4,17 +4,14 @@ public class Vector {
     double x, y , z;
 
     public Vector(double x, double y, double z) {
-        double length = Math.sqrt(x*x + y*y + z*z);
         
-        if (length > 0) {
-            this.x = x/length;
-            this.y = y/length;
-            this.z = z/length; 
-        }
+            this.x = x;
+            this.y = y;
+            this.z = z;
         
     }
 
-    Vector crossProduct(Vector V)
+    Vector cross(Vector V)
 	{
 		Vector CrossVector = new Vector(
 				y * V.z - z * V.y,
@@ -22,4 +19,22 @@ public class Vector {
 				x * V.y - y * V.x);
 		return CrossVector;		
 	}
+
+    Vector subtract(Vector V)
+	{
+		Vector returnVec = new Vector(x - V.x, y - V.y, z - V.z);
+		return returnVec;		
+	}
+
+    double dot(Vector V)
+	{
+		double product = x*V.x + y * V.y + z * V.z;
+		return product;		
+	}
+
+    Vector normalize() {
+        double len = Math.sqrt(x*x + y*y + z*z);
+        return new Vector(x / len, y / len, z / len);
+    }
+
 }

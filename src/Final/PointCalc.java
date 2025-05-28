@@ -62,14 +62,14 @@ public class PointCalc {
         viewVector = new Vector(Screen.viewTo[0] - Screen.viewFrom[0], Screen.viewTo[1] - Screen.viewFrom[1], Screen.viewTo[2] - Screen.viewFrom[2]);
         directionVector = new Vector(1, 1, 1);
 
-        planeVect1 = viewVector.crossProduct(directionVector);
-        planeVect2 = viewVector.crossProduct(planeVect1);
+        planeVect1 = viewVector.cross(directionVector);
+        planeVect2 = viewVector.cross(planeVect1);
 
         p = new Plane(planeVect1, planeVect2, Screen.viewTo);
 
         rotVector = PointCalc.getRVector(Screen.viewFrom, Screen.viewTo);
-        n1 = viewVector.crossProduct(rotVector);
-        n2 = viewVector.crossProduct(n1);
+        n1 = viewVector.cross(rotVector);
+        n2 = viewVector.cross(n1);
 
         calcFocusPos = PointCalc.calculatePositionP(Screen.viewFrom, Screen.viewTo, Screen.viewTo[0], Screen.viewTo[1], Screen.viewTo[2]);
         calcFocusPos[0] *= Screen.zoom;

@@ -1,6 +1,8 @@
 package Final;
 
 import javax.swing.JPanel;
+import javax.swing.text.ViewFactory;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
@@ -16,6 +18,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Screen extends JPanel implements KeyListener, MouseMotionListener, MouseWheelListener {
 
@@ -63,6 +66,7 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
         }
         g.drawString(System.currentTimeMillis() + "", 20, 20);
         updateView();
+        //checkCollision();
         sleepAndRefresh();
     }
 
@@ -82,15 +86,6 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
                 
     }
 
-    static void checkCollision(Rectangle r) {
-        // if (r.intersects(new Rectangle((int)viewFrom[0], (int)viewFrom[1], (int)viewFrom[0] - 2, (int)viewFrom[1] - 2))) {
-        //     for (int i = 0; i < keys.length; i++) {
-        //         if (keys[i]) {
-        //             keys[i] = false;
-        //         }
-        //     }
-        // }
-    }
 
     void makeWorld() {
         shapes.add(new testGeometry(1, 1, 1, 5, 2, 1, getBackground()));
@@ -137,7 +132,7 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
         Vector viewVector = new Vector(viewTo[0] - viewFrom[0], viewTo[1] - viewFrom[1], viewTo[2] - viewFrom[2]);
         double moveX = 0, moveY = 0, moveZ = 0;
         Vector vertVector = new Vector(0, 0, 1);
-        Vector sideVector = viewVector.crossProduct(vertVector);
+        Vector sideVector = viewVector.cross(vertVector);
 
 		if(keys[0]) {
 			moveX += viewVector.x;
@@ -179,11 +174,6 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
         viewFrom[0] = x;
         viewFrom[1] = y;
         viewFrom[2] = z;
-        for (int i = 0; i < PolygonObject.colRects.size(); i++) {
-            checkCollision(PolygonObject.colRects.get(i));
-        }
-    
-        
         updateView();
     }
 
@@ -194,6 +184,16 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
         viewTo[1] = viewFrom[1] + r * Math.sin(horLook);
         viewTo[2] = viewFrom[2] + vertLook;
     }
+
+    void checkCollision() {
+        Ray viewRay = new Ray(new Vector(viewFrom[0], viewFrom[1], viewFrom[2]), new Vector(viewTo[0], viewTo[1], viewTo[2]));
+        for (int i = 0; i < dPolygons.size(); i++) {
+            boolean hit = Ray.rayHitsPolygons(viewRay, dPolygons);
+            System.out.println("User view hits polygon: " + hit);
+        }
+        
+    }
+    
 
     public void mouseWheelMoved(MouseWheelEvent e) {
         if (e.getUnitsToScroll() > 0) {
