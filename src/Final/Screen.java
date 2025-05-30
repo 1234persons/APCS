@@ -33,7 +33,7 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
     static double zoom = 1000, minZoom = 500, maxZoom = 2500, mouseX = 0, mouseY = -100, moveSpeed = 1;
     double vertLook = 0, horLook = 0, horRotSpd = 900, vertRotSpd = 2200;
     boolean gravity = false;
-
+    BVHNode bvh = BVHBuilder.build(dPolygons);
     public Screen() {
         this.addMouseMotionListener(this);
         this.addKeyListener(this);
@@ -66,7 +66,6 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
         }
         g.drawString(System.currentTimeMillis() + "", 20, 20);
         updateView();
-        //checkCollision();
         sleepAndRefresh();
     }
 
@@ -104,7 +103,7 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
     void setOrder()
 	{
 		double[] k = new double[dPolygons.size()];
-		newOrder = new int[dPolygons.size()];
+		newOrder = ;
 		
 		for(int i = 0; i < dPolygons.size(); i++)
 		{
@@ -174,6 +173,7 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
         viewFrom[0] = x;
         viewFrom[1] = y;
         viewFrom[2] = z;
+        checkCollision();
         updateView();
     }
 
@@ -187,10 +187,12 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
 
     void checkCollision() {
         Ray viewRay = new Ray(new Vector(viewFrom[0], viewFrom[1], viewFrom[2]), new Vector(viewTo[0], viewTo[1], viewTo[2]));
-        for (int i = 0; i < dPolygons.size(); i++) {
-            boolean hit = Ray.rayHitsPolygons(viewRay, dPolygons);
-            System.out.println("User view hits polygon: " + hit);
-        }
+            BVHNode bvh = BVHBuilder.build(dPolygons);
+            if (BVHCollision.intersect(viewRay, bvh)) {
+                System.out.println("Penis");
+            }
+            //shapes.add( new testGeometry(Math.random()* 10, Math.random()* 10, Math.random()* 10, Math.random()* 10, Math.random()* 10, Math.random()* 10, Color.orange));
+        
         
     }
     

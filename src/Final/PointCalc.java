@@ -17,7 +17,7 @@ public class PointCalc {
 
 
     static double[] getProj(double[] VF, double[] VT, double x, double y, double z, Plane p) {
-        Vector viewToPoint = new Vector(x - VF[0], y - VF[1], z - VF[2]);
+        Vector viewToPoint = new Vector(x - VF[0], y - VF[1], z - VF[2]).normalize();
 
         t =        (p.nv.x*p.p[0] + p.nv.y*p.p[1] + p.nv.z*p.p[2]
 				 - (p.nv.x*VF[0] + p.nv.y*VF[1] + p.nv.z*VF[2]))
