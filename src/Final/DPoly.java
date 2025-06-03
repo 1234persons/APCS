@@ -3,7 +3,9 @@ package Final;
 import java.awt.Color;
 import java.awt.Polygon;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DPoly {
     Color c;
@@ -33,6 +35,23 @@ public class DPoly {
         Vector v1 = vertices.get(1).subtract(vertices.get(0));
         Vector v2 = vertices.get(2).subtract(vertices.get(0));
         return v1.cross(v2).normalize();
+    }
+
+    Vector centroid() {
+        double cx = 0, cy = 0, cz = 0;
+        for (Vector v : vertices) {
+            cx += v.x;
+            cy += v.y;
+            cz += v.z;
+        }
+        int n = vertices.size();
+        return new Vector(cx / n, cy / n, cz / n);
+    }
+
+    static List<DPoly> sortByCentroidDistance(Vector cameraPos, List<DPoly> polygons) {
+        return polygons.stream()
+            .sorted(Comparator.comparingDouble(p -> p.centroid().distanceTo(cameraPos)))
+            .collect(Collectors.toList());
     }
 
     ArrayList<Vector> getEdges() {

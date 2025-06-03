@@ -19,6 +19,7 @@ import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class Screen extends JPanel implements KeyListener, MouseMotionListener, MouseWheelListener {
 
@@ -33,6 +34,8 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
     static double zoom = 1000, minZoom = 500, maxZoom = 2500, mouseX = 0, mouseY = -100, moveSpeed = 1;
     double vertLook = 0, horLook = 0, horRotSpd = 900, vertRotSpd = 2200;
     boolean gravity = false;
+    Vector viewToVec = new Vector(viewTo[0], viewTo[1], viewTo[2]);
+    Vector viewFromVec = new Vector(viewFrom[0], viewFrom[1], viewFrom[2]);
     BVHNode bvh = BVHBuilder.build(dPolygons);
     public Screen() {
         this.addMouseMotionListener(this);
@@ -103,7 +106,7 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
     void setOrder()
 	{
 		double[] k = new double[dPolygons.size()];
-		newOrder = ;
+		newOrder = new int[dPolygons.size()];
 		
 		for(int i = 0; i < dPolygons.size(); i++)
 		{
@@ -166,6 +169,8 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
 		}
 
         Vector moveVector = new Vector(moveX, moveY, moveZ);
+        Vector newPos = MovementController.tryMove(viewFromVec, moveVector, bvh);
+System.out.println("New user position: " + newPos);
         moveTo(viewFrom[0] + moveVector.x*moveSpeed, viewFrom[1] + moveVector.y*moveSpeed, viewFrom[2] + moveVector.z*moveSpeed);
     }
 
@@ -177,20 +182,43 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
         updateView();
     }
 
+    public static Vector tryMove(Vector currentPos, Vector movementDelta, BVHNode bvh) {
+        Vector proposedPos = currentPos.add(movementDelta);
+
+        boolean blocked = BVHCollision.isMovementBlocked(currentPos, proposedPos, bvh);
+        if (blocked) {
+            System.out.println("Movement blocked by a polygon.");
+            return currentPos; // Don't move
+        } else {
+            return proposedPos; // Move allowed
+        }
+    }
+
     void updateView() {
         double r= Math.sqrt(1 - vertLook*vertLook);
 
         viewTo[0] = viewFrom[0] + r * Math.cos(horLook);
         viewTo[1] = viewFrom[1] + r * Math.sin(horLook);
         viewTo[2] = viewFrom[2] + vertLook;
+        viewToVec = new Vector(viewTo[0], viewTo[1], viewTo[2]);
+        viewFromVec = new Vector(viewFrom[0], viewFrom[1], viewFrom[2]);
     }
 
     void checkCollision() {
-        Ray viewRay = new Ray(new Vector(viewFrom[0], viewFrom[1], viewFrom[2]), new Vector(viewTo[0], viewTo[1], viewTo[2]));
-            BVHNode bvh = BVHBuilder.build(dPolygons);
-            if (BVHCollision.intersect(viewRay, bvh)) {
-                System.out.println("Penis");
-            }
+
+        List<DPoly> visible = CombinedSorter.sortVisiblePolygons(viewFromVec, viewToVec, dPolygons.subList(0, dPolygons.size()), 90.0);
+
+        for (int i = 0; i < visible.size(); i++) {
+            Vector c = visible.get(i).centroid();
+            System.out.printf("Visible Polygon %d at centroid (%.2f, %.2f, %.2f), distance %.2f%n",
+                i, c.x, c.y, c.z, c.distanceTo(viewFromVec));
+        }
+        //     BVHNode bvh = BVHBuilder.build(dPolygons);
+        //     for (int i = 0; i < sorted.size(); i++) {
+        //     Vector c = sorted.get(i).centroid();
+        //     System.out.printf("Polygon %d centroid at (%.2f, %.2f, %.2f) distance %.2f%n",
+        //         i, c.x, c.y, c.z, c.distanceTo(new Vector(viewFrom[0], viewFrom[1], viewFrom[2])));
+        // }
             //shapes.add( new testGeometry(Math.random()* 10, Math.random()* 10, Math.random()* 10, Math.random()* 10, Math.random()* 10, Math.random()* 10, Color.orange));
         
         

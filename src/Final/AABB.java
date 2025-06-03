@@ -54,7 +54,7 @@ public class AABB {
                 Math.min(a.min.y, b.min.y),
                 Math.min(a.min.z, b.min.z)
             ),
-            new Vector(
+            new Vector (
                 Math.max(a.max.x, b.max.x),
                 Math.max(a.max.y, b.max.y),
                 Math.max(a.max.z, b.max.z)
