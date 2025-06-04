@@ -22,7 +22,7 @@ public class DPoly {
         this.y = y;
         this.z = z;
         makeVertices(x, y, z);
-        createPolygon();
+        drawablePolygon = new PolygonObject(x, y, c);
     }
 
     void makeVertices(double[] x, double[] y, double[] z) {
@@ -61,10 +61,6 @@ public class DPoly {
             edges.add(edge);
         }
         return edges;
-    }
-
-    void createPolygon() {
-        drawablePolygon = new PolygonObject(x, y, c);
     }
 
     void updatePolygon() {

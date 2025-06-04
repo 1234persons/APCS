@@ -34,39 +34,34 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
     static double zoom = 1000, minZoom = 500, maxZoom = 2500, mouseX = 0, mouseY = -100, moveSpeed = 1;
     double vertLook = 0, horLook = 0, horRotSpd = 900, vertRotSpd = 2200;
     boolean gravity = false;
-    Vector viewToVec = new Vector(viewTo[0], viewTo[1], viewTo[2]);
-    Vector viewFromVec = new Vector(viewFrom[0], viewFrom[1], viewFrom[2]);
-    BVHNode bvh = BVHBuilder.build(dPolygons);
+    static Vector viewToVec = new Vector(viewTo[0], viewTo[1], viewTo[2]);
+    static Vector viewFromVec = new Vector(viewFrom[0], viewFrom[1], viewFrom[2]);
+    BVHNode bvh= BVHBuilder.build(dPolygons);
+
     public Screen() {
         this.addMouseMotionListener(this);
         this.addKeyListener(this);
         this.addMouseWheelListener(this);
         setFocusable(true);
         invisibleMouse();
-        
         makeWorld();
     }
 
     public void paintComponent(Graphics g) {
+        
         g.setColor(new Color(140, 180, 180));
         g.fillRect(0, 0, (int)Main.screenSize.getWidth(), (int)Main.screenSize.getHeight());
-        
         controls();
+
         PointCalc.setStartingInfo();
-        setOrder();
-        for (int i = 0; i < shapes.size(); i++) {
-            shapes.get(i).updatePoly();
-        }
 
-        for (int i = 0; i < dPolygons.size(); i++) {
-            
-            dPolygons.get(i).updatePolygon();
-        }
+           List<DPoly> tempList = CombinedSorter.sortVisiblePolygons(viewFromVec, viewToVec, dPolygons, 90);
+
+            for (int i = 0; i < tempList.size() - 1; i++) {
+                dPolygons.get(i).updatePolygon();
+                tempList.get(i).drawablePolygon.drawPolygon(g);
+            } 
         
-        for (int i = 0; i < newOrder.length; i++) {
-            dPolygons.get(newOrder[i]).drawablePolygon.drawPolygon(g);
-
-        }
         g.drawString(System.currentTimeMillis() + "", 20, 20);
         updateView();
         sleepAndRefresh();
@@ -90,6 +85,7 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
 
 
     void makeWorld() {
+        
         shapes.add(new testGeometry(1, 1, 1, 5, 2, 1, getBackground()));
 
         for (int i = -10; i < 10; i++) {
@@ -100,35 +96,8 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
             
             
         }
-        
+        bvh = BVHBuilder.build(dPolygons);
     }
-
-    void setOrder()
-	{
-		double[] k = new double[dPolygons.size()];
-		newOrder = new int[dPolygons.size()];
-		
-		for(int i = 0; i < dPolygons.size(); i++)
-		{
-			k[i] = dPolygons.get(i).avgDist;	
-			newOrder[i] = i;
-		}
-		
-	    double temp;
-	    int tempr;	    
-		for (int a = 0; a < k.length-1; a++)
-			for (int b = 0; b < k.length-1; b++)
-				if(k[b] < k[b + 1])
-				{
-					temp = k[b];
-					tempr = newOrder[b];
-					newOrder[b] = newOrder[b + 1];
-					k[b] = k[b + 1];
-					   
-					newOrder[b + 1] = tempr;
-					k[b + 1] = temp;
-				}
-	}
 
     void controls() {
         Vector viewVector = new Vector(viewTo[0] - viewFrom[0], viewTo[1] - viewFrom[1], viewTo[2] - viewFrom[2]);
@@ -169,8 +138,9 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
 		}
 
         Vector moveVector = new Vector(moveX, moveY, moveZ);
-        Vector newPos = MovementController.tryMove(viewFromVec, moveVector, bvh);
-System.out.println("New user position: " + newPos);
+        Vector newPos = tryMove(viewFromVec, moveVector, bvh);
+        //System.out.println("New user position: " + newPos);
+
         moveTo(viewFrom[0] + moveVector.x*moveSpeed, viewFrom[1] + moveVector.y*moveSpeed, viewFrom[2] + moveVector.z*moveSpeed);
     }
 

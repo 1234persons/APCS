@@ -31,4 +31,25 @@ class BVHCollision {
             collectHitsRecursive(ray, node.right, hits);
         }
     }
+
+    public static boolean isMovementBlocked(Vector from, Vector to, BVHNode node) {
+        return isSegmentBlocked(from, to, node);
+    }
+
+    private static boolean isSegmentBlocked(Vector from, Vector to, BVHNode node) {
+        AABB moveBox = AABB.fromPoints(from, to);  // Expand to include both points
+        if (!node.box.intersects(moveBox)) return false;
+
+        if (node.isLeaf()) {
+            List<Vector> verts = node.polygon.vertices;
+            for (int i = 1; i < verts.size() - 1; i++) {
+                if (Ray.segmentIntersectsTriangle(from, to, verts.get(0), verts.get(i), verts.get(i + 1))) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        return isSegmentBlocked(from, to, node.left) || isSegmentBlocked(from, to, node.right);
+    }
 }

@@ -26,6 +26,12 @@ public class Vector {
 		return returnVec;		
 	}
 
+    Vector add(Vector V)
+	{
+		Vector returnVec = new Vector(x + V.x, y + V.y, z + V.z);
+		return returnVec;		
+	}
+
     double dot(Vector V)
 	{
 		double product = x*V.x + y * V.y + z * V.z;

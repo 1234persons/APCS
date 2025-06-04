@@ -71,4 +71,12 @@ class Ray {
         }
         return false;
     }
+
+    public static boolean segmentIntersectsTriangle(Vector p0, Vector p1, Vector v0, Vector v1, Vector v2) {
+        Vector dir = p1.subtract(p0).normalize();
+        double maxDist = p0.distanceTo(p1);
+
+        Double t = rayIntersectTriangle(new Ray(p0, dir), v0, v1, v2);
+        return t != null && t >= 0 && t <= maxDist;
+    }
 }

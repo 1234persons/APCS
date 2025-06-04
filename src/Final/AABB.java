@@ -47,6 +47,21 @@ public class AABB {
         return new AABB(new Vector(minX, minY, minZ), new Vector(maxX, maxY, maxZ));
     }
 
+    public static AABB fromPoints(Vector a, Vector b) {
+    double minX = Math.min(a.x, b.x);
+    double minY = Math.min(a.y, b.y);
+    double minZ = Math.min(a.z, b.z);
+
+    double maxX = Math.max(a.x, b.x);
+    double maxY = Math.max(a.y, b.y);
+    double maxZ = Math.max(a.z, b.z);
+
+    Vector min = new Vector(minX, minY, minZ);
+    Vector max = new Vector(maxX, maxY, maxZ);
+
+    return new AABB(min, max);
+}
+
     static AABB combine(AABB a, AABB b) {
         return new AABB(
             new Vector(
@@ -61,5 +76,11 @@ public class AABB {
             )
         );
     }
+
+    public boolean intersects(AABB other) {
+    return (this.max.x >= other.min.x && this.min.x <= other.max.x) &&
+           (this.max.y >= other.min.y && this.min.y <= other.max.y) &&
+           (this.max.z >= other.min.z && this.min.z <= other.max.z);
+}
 }
 
