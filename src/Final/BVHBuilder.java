@@ -7,6 +7,9 @@ import java.util.List;
 class BVHBuilder {
 
     public static BVHNode build(List<DPoly> polygons) {
+        if (polygons.size() == 0) {
+            return null;
+        }
         if (polygons.size() == 1) {
             return new BVHNode(polygons.get(0));
         }

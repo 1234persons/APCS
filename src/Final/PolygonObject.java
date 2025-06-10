@@ -36,7 +36,7 @@ public class PolygonObject {
     }
 
     void drawPolygon(Graphics g) {
-        if (Visibility.isVisible(Screen.viewFromVec, Screen.viewToVec, Screen.viewToVec.add(new Vector(10, 10, 10)), 90)) {
+        if (draw) {
 
             g.setColor(c);
             g.fillPolygon(p);

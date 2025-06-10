@@ -48,24 +48,59 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
     }
 
     public void paintComponent(Graphics g) {
-        
         g.setColor(new Color(140, 180, 180));
         g.fillRect(0, 0, (int)Main.screenSize.getWidth(), (int)Main.screenSize.getHeight());
-        controls();
-
-        PointCalc.setStartingInfo();
-
-           List<DPoly> tempList = CombinedSorter.sortVisiblePolygons(viewFromVec, viewToVec, dPolygons, 90);
-
-            for (int i = 0; i < tempList.size() - 1; i++) {
-                dPolygons.get(i).updatePolygon();
-                tempList.get(i).drawablePolygon.drawPolygon(g);
-            } 
         
+        controls();
+        PointCalc.setStartingInfo();
+        setOrder();
+        for (int i = 0; i < shapes.size(); i++) {
+            shapes.get(i).updatePoly();
+        }
+
+        for (int i = 0; i < dPolygons.size(); i++) {
+            
+            dPolygons.get(i).updatePolygon();
+        }
+        
+        for (int i = 0; i < newOrder.length; i++) {
+            dPolygons.get(newOrder[i]).drawablePolygon.drawPolygon(g);
+
+        }
         g.drawString(System.currentTimeMillis() + "", 20, 20);
         updateView();
+        //checkCollision();
         sleepAndRefresh();
     }
+
+     void setOrder()
+	{
+		double[] k = new double[dPolygons.size()];
+		newOrder = new int[dPolygons.size()];
+		
+		for(int i = 0; i < dPolygons.size(); i++)
+		{
+			k[i] = dPolygons.get(i).avgDist;	
+			newOrder[i] = i;
+		}
+		
+	    double temp;
+	    int tempr;	    
+		for (int a = 0; a < k.length-1; a++)
+			for (int b = 0; b < k.length-1; b++)
+				if(k[b] < k[b + 1])
+				{
+					temp = k[b];
+					tempr = newOrder[b];
+					newOrder[b] = newOrder[b + 1];
+					k[b] = k[b + 1];
+					   
+					newOrder[b + 1] = tempr;
+					k[b + 1] = temp;
+				}
+	}
+
+    
 
     void sleepAndRefresh() {
         while (true) {
@@ -138,9 +173,6 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
 		}
 
         Vector moveVector = new Vector(moveX, moveY, moveZ);
-        Vector newPos = tryMove(viewFromVec, moveVector, bvh);
-        //System.out.println("New user position: " + newPos);
-
         moveTo(viewFrom[0] + moveVector.x*moveSpeed, viewFrom[1] + moveVector.y*moveSpeed, viewFrom[2] + moveVector.z*moveSpeed);
     }
 
@@ -152,21 +184,8 @@ public class Screen extends JPanel implements KeyListener, MouseMotionListener, 
         updateView();
     }
 
-    public static Vector tryMove(Vector currentPos, Vector movementDelta, BVHNode bvh) {
-        Vector proposedPos = currentPos.add(movementDelta);
-
-        boolean blocked = BVHCollision.isMovementBlocked(currentPos, proposedPos, bvh);
-        if (blocked) {
-            System.out.println("Movement blocked by a polygon.");
-            return currentPos; // Don't move
-        } else {
-            return proposedPos; // Move allowed
-        }
-    }
-
     void updateView() {
         double r= Math.sqrt(1 - vertLook*vertLook);
-
         viewTo[0] = viewFrom[0] + r * Math.cos(horLook);
         viewTo[1] = viewFrom[1] + r * Math.sin(horLook);
         viewTo[2] = viewFrom[2] + vertLook;
